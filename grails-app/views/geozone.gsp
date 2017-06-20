@@ -107,7 +107,7 @@
     <div class="container">
 
         <header class="major">
-            <h4>Create and View ZeoZone:</h4>
+            <h4>Create and View GeoZone:</h4>
 
             <table>
                 <tr>
@@ -117,7 +117,8 @@
                     <th>ArrivalZone</th>
                     <th>DepartureZone</th>
                     <th>Radius</th>
-                    <th>Lat/Long</th>
+                    <th>Latitude</th>
+                    <th>Longitude</th>
                 </tr>
 
 
@@ -142,7 +143,8 @@
                     <td>${fieldValue(bean: geozoneInstance,field: "arrivalZone") }</td>
                     <td>${fieldValue(bean: geozoneInstance,field: "departureStatusCode") }</td>
                     <td>${fieldValue(bean: geozoneInstance,field: "radious") }</td>
-                    %{--<td>${fieldValue(bean: geozoneInstance,field: "CenterLatitude") }</td>--}%
+                    <td>${fieldValue(bean: geozoneInstance,field: "latitude") }</td>
+                        <td>${fieldValue(bean: geozoneInstance,field: "longitude") }</td>
                     </tr>
                 </g:each>
 

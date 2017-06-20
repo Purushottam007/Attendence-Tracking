@@ -69,18 +69,19 @@
         }
 
         function updateCurSelText(shape) {
+
             posstr = "" + selectedShape.position;
             if (typeof selectedShape.position == 'object') {
                 posstr = selectedShape.position.toUrlValue();
             }
             pathstr = "" + selectedShape.getPath;
             if (typeof selectedShape.getPath == 'function') {
-                pathstr = "[ ";
+                pathstr = " ";
                 for (var i = 0; i < selectedShape.getPath().getLength(); i++) {
                     // .toUrlValue(5) limits number of decimals, default is 6 but can do more
-                    pathstr += selectedShape.getPath().getAt(i).toUrlValue() + " , ";
+                    pathstr += selectedShape.getPath().getAt(i).toUrlValue() + "  ";
                 }
-                pathstr += "]";
+                pathstr += " ";
                 alert(pathstr)
 console.log('hello this is path'+pathstr)
             }
@@ -92,7 +93,7 @@ console.log('hello this is path'+pathstr)
             if (typeof selectedShape.getBounds == 'function') {
                 var tmpbounds = selectedShape.getBounds();
                 cntstr = "" + tmpbounds.getCenter().toUrlValue();
-                bndstr = "[" + tmpbounds.getNorthEast().toUrlValue()  + tmpbounds.getSouthWest().toUrlValue() + "]";
+                bndstr =   tmpbounds.getNorthEast().toUrlValue()  + tmpbounds.getSouthWest().toUrlValue() ;
                 console.log('hello this is bound'+bndstr)
             }
             alert(pathstr)

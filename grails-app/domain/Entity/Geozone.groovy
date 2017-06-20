@@ -21,6 +21,11 @@ class Geozone {
     String iconName
     String zonetype
     Double radious
+
+    String latitude;
+    String longitude;
+
+
     String latitude1
     String longitude1
     String latitude2
@@ -102,6 +107,10 @@ class Geozone {
         longitude9(nullable: true,blank:true)
         latitude10(nullable: true,blank:true)
         longitude10(nullable: true,blank:true)
+
+        latitude(nullable: true,blank:true)
+        longitude(nullable: true,blank:true)
+
         clientUpload(nullable: true,blank:true)
         clientId(nullable: true,blank:true)
         groupId(nullable: true,blank:true)
