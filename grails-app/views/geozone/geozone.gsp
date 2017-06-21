@@ -127,7 +127,7 @@
 
 
                         <td>
-                        <g:if test="${geozoneInstance.zonetype=='polygon'}">
+                        <g:if test="${geozoneInstance.radious=='undefined'}">
                             <g:radio name="optradio" value="2" checked="true"/>
                            Polygon
                         </g:if>
@@ -143,8 +143,8 @@
                     <td>${fieldValue(bean: geozoneInstance,field: "arrivalZone") }</td>
                     <td>${fieldValue(bean: geozoneInstance,field: "departureStatusCode") }</td>
                     <td>${fieldValue(bean: geozoneInstance,field: "radious") }</td>
-                    <td>${fieldValue(bean: geozoneInstance,field: "latitude") }</td>
-                        <td>${fieldValue(bean: geozoneInstance,field: "longitude") }</td>
+                    <td>${fieldValue(bean: geozoneInstance,field: "latitude1") }</td>
+                        <td>${fieldValue(bean: geozoneInstance,field: "longitude1") }</td>
                     </tr>
                 </g:each>
 

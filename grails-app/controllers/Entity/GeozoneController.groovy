@@ -12,31 +12,38 @@ class GeozoneController {
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        println"oooooooooooooooo"+Geozone
+ //       println"oooooooooooooooo"+Geozone
         println":::::::::::::::::::"+Geozone.list(params)
        // render  model:[geozoneList: Geozone.list(params),geozoneCount: Geozone.count()]
     }
 
     @Secured(['ROLE_USER','ROLE_ADMIN'])
+    def geo(){
+        render view: 'geozone'
+    }
+
+    @Secured(['ROLE_USER','ROLE_ADMIN'])
     def geozone(Integer max){
         params.max = Math.min(max ?: 10, 100)
-        println":::::::::::::::::::"+Geozone.list(params)
-        render view: '/geozone', model:[geozoneList: Geozone.list(params), geozoneCount: Geozone.count()]
+    //    println":::::::::::::::::::"+Geozone.list(params)
+        render view: 'geozone', model:[geozoneList: Geozone.list(params), geozoneCount: Geozone.count()]
     }
     @Secured(['ROLE_USER','ROLE_ADMIN'])
     def ft(){
         def path=params.str;
-        def bound=params.st;
-     //   println"gggggggggggggg"+bound
-        println"sssssssssssssssssssssss"+path
+        def cr=params.st;
+        def rad=params.stt
+        def rect=params.stcnt;
+        println"gggggggggggggg"+rect
+//        println"sssssssssssssssssssssss"+path
 
-       
-println"hhhhhhhhhhh"+(bound!='undefined')
-        println"sddddddddddddd"+(path!='undefined')
+
+//println"hhhhhhhhhhh"+(bound!='undefined')
+   //     println"sddddddddddddd"+(path!='undefined')
         def ar
         if(path!='undefined'){
              ar=path.trim().split(" ")
-            println("XXXXXXXXXXXXXXXXXX"+(ar).toString())
+      //      println("XXXXXXXXXXXXXXXXXX"+(ar).toString())
 
         }
 
@@ -47,23 +54,31 @@ println"hhhhhhhhhhh"+(bound!='undefined')
 
 
            // println"oooooooooooooooooooooo"+bound
-        else if(bound!='undefined'){
+        else if(cr!='undefined'){
 
-             ar=bound.trim().split(" ")
-           
+             ar=cr.trim().split(" ")
+
+        }
+        else if(rect!='undefined'){
+            ar=rect.trim().split(" ")
         }
 
+
         //println"bounds"+arr[0]
+        Geozone geozone=new Geozone();
 
 
         String[] lat = new String[10];
         String[] lng = new String[10];
         int i =0;
-        println"OOOOOOOOOOOOOOOOOOOOO"+ar.size()
-        println("array value"+Arrays.toString(ar))
+       // println"OOOOOOOOOOOOOOOOOOOOO"+ar.size()
+        //println("array value"+Arrays.toString(ar))
         for(int j=0 ;j<ar.size(); j++){
          //   lat[j] = "fffffffffffffffff"+ar[j]
-            Geozone geozone=new Geozone();
+
+
+
+
             println"///////////"+ar[j]
            def g= ar[j].split(",")
             println"Lat: $j "+g[0]+", Lng:  "+g[1]
@@ -72,71 +87,51 @@ println"hhhhhhhhhhh"+(bound!='undefined')
             lng[i]=g[1]
             println("lng[$j]"+lng[0])
 
-            geozone.latitude=lat[i]
-            geozone.longitude=lng[i]
-
-
-            geozone.setCompany(Company.findById(1))
-            geozone.save(failOnError:true);
-
-
-
-            //println"oooooooo"+ar[j+1 ] +"            "+ar[j]
-         //   lng[j] = "qqqqqqqqqqqqqqqq"+ar[j+1]
-           // println"lllllllll"+lat[j]
-           // println"gggggggggg"+lng[j]
             j=j+1
             i = i+1
+
+
+
+
         }
-        /*def long = new String[10]
-        Geozone geozone=new Geozone();
-        for(int i=0;i<ar.size()-1;i++){
-            println"ooooooooooooo"+ar[i]
-            lat.putAt(i) ar[i];
-            println("jjj"+geozone.latitude)
-            geozone.longitude = ar[i+1];
-            println("kkkkkkkkkkk"+geozone.longitude)
-            //  geozone
-            i=i+1;
-
-        }*/
 
 
+        geozone.latitude1=lat[0]
+        geozone.longitude1=lng[0]
 
-        /*for(int i=1;i<ar.size()-2;i++){
+        geozone.latitude2=lat[1]
+        geozone.longitude2=lng[1]
 
-            geozone.longitude[i+1];
+        geozone.latitude3=lat[2]
+        geozone.longitude3=lng[2]
 
+        geozone.latitude4=lat[3]
+        geozone.longitude4=lng[3]
 
-        }*/
+        geozone.latitude5=lat[4]
+        geozone.longitude5=lng[4]
 
-       /* geozone.latitude1=ar[0];
-        println "uuuuuuuuuuuuuuuuuuu"+geozone.latitude1
-        geozone.longitude1=ar[1]
-          println "sds"+geozone.longitude1
-        geozone.latitude2=ar[0];
+        geozone.latitude6=lat[5]
+        geozone.longitude6=lng[5]
 
-        geozone.longitude2=ar[1]
-        geozone.latitude3=ar[0];
-        geozone.longitude3=ar[1]
-        geozone.latitude4=ar[0];
-        geozone.longitude4=ar[1]
-        geozone.latitude5=ar[0];
-        geozone.longitude5=ar[1]
-      //  println "aaaaaaaaaaaa"+geozone.longitude5
-        geozone.latitude6=ar[0];
-        geozone.longitude6=ar[1]
-        geozone.latitude7=ar[0];
-        geozone.longitude7=ar[1]
-        geozone.latitude8=ar[0];
-        geozone.longitude8=ar[1]
-        geozone.latitude9=ar[0];
-        geozone.longitude9=ar[1]
-        geozone.latitude10=ar[0];
-        geozone.longitude10=ar[1]*/
+        geozone.latitude7=lat[6]
+        geozone.longitude7=lng[6]
+
+        geozone.latitude8=lat[7]
+        geozone.longitude8=lng[7]
+
+        geozone.latitude9=lat[8]
+        geozone.longitude9=lng[8]
+
+        geozone.latitude10=lat[9]
+        geozone.longitude10=lng[9]
+
+        geozone.radious=rad
 
 
-  //     println"ggggggggggggggggg"+ geozone.getLatitude()
+
+        geozone.setCompany(Company.findById(1))
+        geozone.save(failOnError:true);
 
         render status:200
 

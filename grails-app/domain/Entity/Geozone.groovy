@@ -20,10 +20,10 @@ class Geozone {
     String shapeColor
     String iconName
     String zonetype
-    Double radious
+    String radious
 
-    String latitude;
-    String longitude;
+  //  String latitude;
+   // String longitude;
 
 
     String latitude1
@@ -108,8 +108,8 @@ class Geozone {
         latitude10(nullable: true,blank:true)
         longitude10(nullable: true,blank:true)
 
-        latitude(nullable: true,blank:true)
-        longitude(nullable: true,blank:true)
+      //  latitude(nullable: true,blank:true)
+      //  longitude(nullable: true,blank:true)
 
         clientUpload(nullable: true,blank:true)
         clientId(nullable: true,blank:true)

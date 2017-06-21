@@ -82,7 +82,7 @@
                     pathstr += selectedShape.getPath().getAt(i).toUrlValue() + "  ";
                 }
                 pathstr += " ";
-                alert(pathstr)
+
 console.log('hello this is path'+pathstr)
             }
 
@@ -95,19 +95,9 @@ console.log('hello this is path'+pathstr)
                 cntstr = "" + tmpbounds.getCenter().toUrlValue();
                 bndstr =   tmpbounds.getNorthEast().toUrlValue()  + tmpbounds.getSouthWest().toUrlValue() ;
                 console.log('hello this is bound'+bndstr)
+                console.log('hello this is cnrstr'+cntstr)
             }
-            alert(pathstr)
-            var url  = '${createLink(action:'ft',controller:'geozone')}';
 
-            var locData = {str:pathstr,st:bndstr}
-            commonAjax(locData,url).done(function(response){alert(locData)
-                if(response == true || response == 'true'){
-                    alert('Data saved Successfully');
-
-                }else{
-                    alert("Some Internal Error occured please try again after some time .")
-                }
-            } );
 
 
 
@@ -115,11 +105,34 @@ console.log('hello this is path'+pathstr)
             cntrstr = "" + selectedShape.getCenter;
             if (typeof selectedShape.getCenter == 'function') {
                 cntrstr = "" + selectedShape.getCenter().toUrlValue();
+                console.log('hello this is CenterOfradius'+cntrstr)
             }
             radstr = "" + selectedShape.getRadius;
             if (typeof selectedShape.getRadius == 'function') {
                 radstr = "" + selectedShape.getRadius();
+                console.log('hello this is radius'+radstr)
             }
+
+
+                var url = '${createLink(action:'ft',controller:'geozone')}';
+
+                var locData = {str: pathstr, st: cntrstr, stt: radstr, stcnt: cntstr}
+                commonAjax(locData, url).done(function (response) {
+                    alert(locData)
+                    if (response == true || response == 'true') {
+                        alert('Data saved Successfully');
+
+                    }
+                     /*else{
+                    alert("Some Internal Error occured please try again after some time .")
+                }*/
+            } );
+
+
+
+
+
+
             curseldiv.innerHTML = "<b>cursel</b>: " + selectedShape.type + " " + selectedShape + "; <i>pos</i>: " + posstr + " ; <i>path</i>: " + pathstr + " ; <i>bounds</i>: " + bndstr + " ; <i>Cb</i>: " + cntstr + " ; <i>radius</i>: " + radstr + " ; <i>Cr</i>: " + cntrstr ;
 
         }
@@ -218,8 +231,8 @@ console.log('hello this is path'+pathstr)
         /////////////////////////////////////
         function initialize() {
             map = new google.maps.Map(document.getElementById('map'), { //var
-                zoom: 12,//10,
-                center: new google.maps.LatLng(22.338,114.057),//(22.344, 114.048),
+                zoom: 15,//10,
+                center: new google.maps.LatLng(12.928837, 77.739338),//(22.344, 114.048),
                 mapTypeId: google.maps.MapTypeId.ROADMAP,
                 disableDefaultUI: false,
                 zoomControl: true
@@ -356,7 +369,7 @@ console.log('hello this is path'+pathstr)
     </div>
     <div id="curpos"></div>
     <div id="cursel"></div>
-    <div id="note"><small>Note: markers can be selected, but are not graphically indicated; can be deleted, but cannot have their color changed.</small></div>
+    %{--<div id="note"><small>Note: markers can be selected, but are not graphically indicated; can be deleted, but cannot have their color changed.</small></div>--}%
     <g:form controller="geozone" action="geozone">
         <g:actionSubmit value="Save"/>
     </g:form>
