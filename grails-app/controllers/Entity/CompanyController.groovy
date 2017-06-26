@@ -1,5 +1,7 @@
 package Entity
 
+import grails.plugin.springsecurity.annotation.Secured
+
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 
@@ -7,21 +9,28 @@ import grails.transaction.Transactional
 class CompanyController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
-
+    @Secured(['ROLE_USER','ROLE_ADMIN'])
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         respond Company.list(params), model:[companyCount: Company.count()]
     }
-
+    @Secured(['ROLE_USER','ROLE_ADMIN'])
+    def camp(Integer max) {
+        params.max = Math.min(max ?: 10, 100)
+        respond Company.list(params), model:[companyCount: Company.count()]
+        render view: 'index'
+    }
+    @Secured(['ROLE_USER','ROLE_ADMIN'])
     def show(Company company) {
         respond company
     }
-
+    @Secured(['ROLE_USER','ROLE_ADMIN'])
     def create() {
         respond new Company(params)
     }
 
     @Transactional
+    @Secured(['ROLE_USER','ROLE_ADMIN'])
     def save(Company company) {
         if (company == null) {
             transactionStatus.setRollbackOnly()
@@ -45,12 +54,13 @@ class CompanyController {
             '*' { respond company, [status: CREATED] }
         }
     }
-
+    @Secured(['ROLE_USER','ROLE_ADMIN'])
     def edit(Company company) {
         respond company
     }
 
     @Transactional
+    @Secured(['ROLE_USER','ROLE_ADMIN'])
     def update(Company company) {
         if (company == null) {
             transactionStatus.setRollbackOnly()
@@ -75,7 +85,8 @@ class CompanyController {
         }
     }
 
-    @Transactional
+    //@Transactional
+    @Secured(['ROLE_USER','ROLE_ADMIN'])
     def delete(Company company) {
 
         if (company == null) {

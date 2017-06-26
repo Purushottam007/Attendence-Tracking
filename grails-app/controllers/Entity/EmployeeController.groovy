@@ -1,5 +1,7 @@
 package Entity
 
+import grails.plugin.springsecurity.annotation.Secured
+
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 
@@ -7,21 +9,22 @@ import grails.transaction.Transactional
 class EmployeeController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
-
+    @Secured(['ROLE_USER','ROLE_ADMIN'])
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         respond Employee.list(params), model:[employeeCount: Employee.count()]
     }
-
+    @Secured(['ROLE_USER','ROLE_ADMIN'])
     def show(Employee employee) {
         respond employee
     }
-
+    @Secured(['ROLE_USER','ROLE_ADMIN'])
     def create() {
         respond new Employee(params)
     }
 
     @Transactional
+    @Secured(['ROLE_USER','ROLE_ADMIN'])
     def save(Employee employee) {
         if (employee == null) {
             transactionStatus.setRollbackOnly()
@@ -45,12 +48,13 @@ class EmployeeController {
             '*' { respond employee, [status: CREATED] }
         }
     }
-
+    @Secured(['ROLE_USER','ROLE_ADMIN'])
     def edit(Employee employee) {
         respond employee
     }
 
     @Transactional
+    @Secured(['ROLE_USER','ROLE_ADMIN'])
     def update(Employee employee) {
         if (employee == null) {
             transactionStatus.setRollbackOnly()
@@ -76,6 +80,7 @@ class EmployeeController {
     }
 
     @Transactional
+    @Secured(['ROLE_USER','ROLE_ADMIN'])
     def delete(Employee employee) {
 
         if (employee == null) {

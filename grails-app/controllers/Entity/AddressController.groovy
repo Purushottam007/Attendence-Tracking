@@ -1,5 +1,7 @@
 package Entity
 
+import grails.plugin.springsecurity.annotation.Secured
+
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 
@@ -7,21 +9,22 @@ import grails.transaction.Transactional
 class AddressController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
-
+    @Secured(['ROLE_USER','ROLE_ADMIN'])
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         respond Address.list(params), model:[addressCount: Address.count()]
     }
-
+    @Secured(['ROLE_USER','ROLE_ADMIN'])
     def show(Address address) {
         respond address
     }
-
+    @Secured(['ROLE_USER','ROLE_ADMIN'])
     def create() {
         respond new Address(params)
     }
 
     @Transactional
+    @Secured(['ROLE_USER','ROLE_ADMIN'])
     def save(Address address) {
         if (address == null) {
             transactionStatus.setRollbackOnly()
@@ -45,12 +48,13 @@ class AddressController {
             '*' { respond address, [status: CREATED] }
         }
     }
-
+    @Secured(['ROLE_USER','ROLE_ADMIN'])
     def edit(Address address) {
         respond address
     }
 
     @Transactional
+    @Secured(['ROLE_USER','ROLE_ADMIN'])
     def update(Address address) {
         if (address == null) {
             transactionStatus.setRollbackOnly()
@@ -76,6 +80,7 @@ class AddressController {
     }
 
     @Transactional
+    @Secured(['ROLE_USER','ROLE_ADMIN'])
     def delete(Address address) {
 
         if (address == null) {

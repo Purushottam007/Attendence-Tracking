@@ -16,11 +16,11 @@ class GeozoneController {
         println":::::::::::::::::::"+Geozone.list(params)
        // render  model:[geozoneList: Geozone.list(params),geozoneCount: Geozone.count()]
     }
-
+/*
     @Secured(['ROLE_USER','ROLE_ADMIN'])
     def geo(){
         render view: 'geozone'
-    }
+    }*/
 
     @Secured(['ROLE_USER','ROLE_ADMIN'])
     def geozone(Integer max){
@@ -28,6 +28,15 @@ class GeozoneController {
     //    println":::::::::::::::::::"+Geozone.list(params)
         render view: 'geozone', model:[geozoneList: Geozone.list(params), geozoneCount: Geozone.count()]
     }
+   /* @Secured(['ROLE_USER','ROLE_ADMIN'])
+    def gt() {
+        def g=params.gtt
+
+        println("ttttttttttttttttt"+g)
+        render "hello"
+    }*/
+
+
     @Secured(['ROLE_USER','ROLE_ADMIN'])
     def ft(){
         def path=params.str;
@@ -134,13 +143,6 @@ class GeozoneController {
         geozone.save(failOnError:true);
 
         render status:200
-
-
-
-
-
-
-
     }
 
 
@@ -159,10 +161,22 @@ class GeozoneController {
     }*/
    @Secured(['ROLE_USER','ROLE_ADMIN'])
     def form() {
+        println"kkkkkkk"+params
+
+       Geozone geozone=Geozone.findById(params.id)
+
+       println"jjjjjjjjjjj"+geozone?.latitude1
+
+       render view: 'form', model:[geozoneInstance: geozone]
+    }
+
+   /* @Secured(['ROLE_USER','ROLE_ADMIN'])
+    def forms() {
+
 
         render view: 'form'
     }
-
+*/
 
 
 

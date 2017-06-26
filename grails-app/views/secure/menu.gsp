@@ -91,8 +91,9 @@
                     Adminstration <span class="caret"></span>
                 </button>
                 <ul class="dropdown-content">
-                    <li><a href="#">Employee-Admin</a></li>
-                    <li><a href="#">Company-Admin</a></li>
+                    <li><a href="#">Employee</a></li>
+                    <li><g:link controller="Company" action="camp">Company</g:link></li>
+
                     <li><g:link controller="Geozone" action="Geozone">geozone</g:link></li>
                 </ul>
             </li>

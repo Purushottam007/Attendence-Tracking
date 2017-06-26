@@ -111,35 +111,34 @@
 
             <table>
                 <tr>
-                    <th>select</th>
+                    <th>select   ZoneType</th>
                     <th>Geozonez ID</th>
-                    <th>ZoneType</th>
+                   %{-- <th>ZoneType</th>--}%
                     <th>ArrivalZone</th>
                     <th>DepartureZone</th>
                     <th>Radius</th>
                     <th>Latitude</th>
                     <th>Longitude</th>
                 </tr>
-
-
                 <g:each in="${geozoneList}" status="i" var="geozoneInstance">
+
                     <tr>
 
 
                         <td>
                         <g:if test="${geozoneInstance.radious=='undefined'}">
-                            <g:radio name="optradio" value="2" checked="true"/>
+                            <g:radio id="radio"  name="optradio" value="${fieldValue(bean: geozoneInstance,field: "id") }" checked="true"/>
                            Polygon
                         </g:if>
                         <g:else>
 
-                            <g:radio name="optradio" value="2" checked="true"/>
-                            Radius
+                            <g:radio id="radio"  name="optradio" value="${fieldValue(bean: geozoneInstance,field: "id") }" checked="true"/>
+                            Circle
                         </g:else>
                        </td>
 
-                    <td>${fieldValue(bean: geozoneInstance,field: "geozoneId") }</td>
-                    <td>${fieldValue(bean: geozoneInstance,field: "zonetype") }</td>
+                    <td>${fieldValue(bean: geozoneInstance,field: "id") }</td>
+                    %{--<td>${fieldValue(bean: geozoneInstance,field: "zonetype") }</td>--}%
                     <td>${fieldValue(bean: geozoneInstance,field: "arrivalZone") }</td>
                     <td>${fieldValue(bean: geozoneInstance,field: "departureStatusCode") }</td>
                     <td>${fieldValue(bean: geozoneInstance,field: "radious") }</td>
@@ -147,59 +146,23 @@
                         <td>${fieldValue(bean: geozoneInstance,field: "longitude1") }</td>
                     </tr>
                 </g:each>
-
-
-
-                %{-- <tr>
-
-                 <g:each in="${geozoneList}" status="i" var="geozoneInstance">
-
-
-                     <td>
-                     <g:if test="${geozoneInstance.zonetype=='radius'}">
-
-
-
-                         <g:radio name="optradio" value="2" checked="true"/>
-                     Radius
-                     </g:if>
-                     </td>
-                     <td>${fieldValue(bean: geozoneInstance,field: "geozoneId") }</td>
-                     <td>${fieldValue(bean: geozoneInstance,field: "zonetype") }</td>
-                     <td>${fieldValue(bean: geozoneInstance,field: "arrivalZone") }</td>
-                     <td>${fieldValue(bean: geozoneInstance,field: "departureStatusCode") }</td>
-                     <td>${fieldValue(bean: geozoneInstance,field: "radious") }</td>
-                     <td>${fieldValue(bean: geozoneInstance,field: "CenterLatitude") }</td>
-                 </g:each>
-
-
-                 </tr>
---}%
-
-
-
-
-
             </table>
 
           %{-- <li><g:link controller="Geozone" class="button special">Log Out</g:link></li>--}%
 
-            <g:link controller="Geozone" action="form">
-
-
-                <g:actionSubmit value="View"/>
+            <g:link class="view btn btn-primary" controller="Geozone" action="form">
+                View
             </g:link>
 
-            <g:link controller="Geozone" action="form">
-
-
-                <g:actionSubmit value="Create"/>
+            <g:link class="btn btn-primary" controller="Geozone" action="form">
+                Create
             </g:link>
 
 
 
 
         </header>
+
 
     </div>
 </section>
@@ -219,5 +182,56 @@
     </div>
 
 </footer>
+
+<script>
+
+    function commonAjax(data,url){
+        return $.ajax({
+            url: url,
+            type: 'POST',
+            data: data
+        });
+    }
+
+    console.log(document.getElementById('radio').checked)
+    var x;
+    var validUrl
+    $("input[name='optradio']").change(function(){
+       alert($(this).val())
+        alert($(".view").attr("href"))
+        var url = $(".view").attr("href")
+        alert((validUrl==undefined))
+        if(validUrl==undefined){
+            validUrl = url
+        }
+
+        $(".view").attr("href",validUrl+"/"+$(this).val())
+        x = $(this).val()
+
+        console.log("this is x " + x)
+    });
+
+
+
+
+
+
+/*
+var url = '${createLink(action:'gt',controller:'geozone')}';
+
+var locData = {gtt:x}
+commonAjax(locData, url).done(function (response) {
+    alert(locData)
+    if (response == true || response == 'true') {
+        alert('Data saved Successfully');
+
+    }
+
+} );
+*/
+
+
+</script>
+
 </body>
 </html>
