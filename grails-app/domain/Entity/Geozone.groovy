@@ -5,7 +5,7 @@ import java.sql.Time
 class Geozone {
 
 
-   // String geozoneId
+    String geozoneId
     Integer sortId
   //  Double minLatitude
    // Double maxLatitude
@@ -128,7 +128,7 @@ class Geozone {
     //    CenterLatitude(nullable: true,blank:true)
       //  CenterLongitude(nullable: true,blank:true)
         country(nullable: true,blank:true)
-       // geozoneId(nullable: true,blank:true)
+       geozoneId(nullable: true,blank:true)
     }
 
 

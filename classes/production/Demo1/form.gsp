@@ -9,7 +9,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <!-- NOTE: two libraries to load are comma-separated; otherwise last mention of the query string arg overwrites the previous -->
     <script type="text/javascript"
-            src="http://maps.google.com/maps/api/js?key=AIzaSyAtljsW_aUjWFCoyENM-FwBu9yU-XddIWo&v=3.21.5a&libraries=drawing&signed_in=true&libraries=places,drawing"></script>
+            src="http://maps.google.com/maps/api/js?key=AIzaSyAkJ1SwM7KfvI708M_M-qu6JWmu6bNH7HU&v=3.21.5a&libraries=drawing&signed_in=true&libraries=places,drawing"></script>
     <style type="text/css">
 
     #map, html, body {
@@ -130,6 +130,7 @@
         posstr = "" + selectedShape.position;
         if (typeof selectedShape.position == 'object') {
             posstr = selectedShape.position.toUrlValue();
+            console.log('hello this is pos'+posstr)
         }
         pathstr = "" + selectedShape.getPath;
         if (typeof selectedShape.getPath == 'function') {
@@ -171,21 +172,55 @@
             console.log('hello this is radius'+radstr)
         }
 
+/*if(posstr!='undefined'||radstr!='undefined'||cntstr!='undefined')
+{
+       var eventsUrl = '${createLink(action:'events',controller:'eventData')}';
 
-        var url = '${createLink(action:'ft',controller:'geozone')}';
-
-        var locData = {str: pathstr, st: cntrstr, stt: radstr, stcnt: cntstr}
-        commonAjax(locData, url).done(function (response) {
+        var locData = {pss: posstr, stts: radstr, stcnts: cntstr}
+        commonAjax(locData, eventsUrl).done(function (response) {
             alert(locData)
             if (response == true || response == 'true') {
                 alert('Data saved Successfully');
 
             }
-            /*else{
+
+        }*/
+
+
+
+
+if(posstr!='undefined') {
+    var eventUrl = '${createLink(action:'event',controller:'eventData')}';
+
+    var locData = {ps: posstr,geozone:xyz}
+    commonAjax(locData, eventUrl).done(function (response) {
+        alert(locData)
+        if (response == true || response == 'true') {
+            alert('Data saved Successfully');
+
+        }
+
+    });
+}
+
+else {
+
+
+    var url = '${createLink(action:'ft',controller:'geozone')}';
+
+    var locData = {str: pathstr, st: cntrstr, stt: radstr, stcnt: cntstr}
+    commonAjax(locData, url).done(function (response) {
+        alert(locData)
+        if (response == true || response == 'true') {
+            alert('Data saved Successfully');
+
+        }
+         /*else{
              alert("Some Internal Error occured please try again after some time .")
              }*/
         } );
 
+}
 
 
 

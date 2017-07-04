@@ -39,10 +39,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 
-    %{--<asset:javascript src="jquery.min.js"/>
-     <asset:javascript src="skel.min.js"/>
-     <asset:javascript src="skel-layers.min.js"/>
-     <asset:javascript src="init.js"/>--}%
+
 
     <script src="grails-app/assets/javascripts/jquery.min.js" type="text/javascript"></script>
     <script src="grails-app/assets/javascripts/skel.min.js" type="text/javascript"></script>
@@ -56,15 +53,11 @@
     <script src="js/init.js"></script>
     %{--<noscript>
 --}%
-        <asset:stylesheet src="drop.css"/>
-        <asset:stylesheet src="style.css"/>
-        <asset:stylesheet src="style-xlarge.css"/>
+    <asset:stylesheet src="drop.css"/>
+    <asset:stylesheet src="style.css"/>
+    <asset:stylesheet src="style-xlarge.css"/>
 
-       %{-- <link rel="stylesheet" href="drop.css" />
-        <link rel="stylesheet" href="style.css" />
-        <link rel="stylesheet" href="style-xlarge.css" />--}%
-    %{--</noscript>--}%
-    <!-- Latest compiled and minified CSS -->
+
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
@@ -81,7 +74,7 @@
 <!-- Header -->
 <header id="header">
     <h1>
-        <a href="index.html">Attendance Track</a>
+        GeoZone
     </h1>
     <nav id="nav">
         <ul class="g">
@@ -91,30 +84,13 @@
                     Adminstration <span class="caret"></span>
                 </button>
                 <ul class="dropdown-content">
-                    <li><a href="#">Employee</a></li>
                     <li><g:link controller="Company" action="camp">Company</g:link></li>
 
                     <li><g:link controller="Geozone" action="Geozone">geozone</g:link></li>
                     <li><g:link controller="eventData" action="eventList">event</g:link></li>
-                </ul>
 
+                </ul>
             </li>
-
-
-           %{-- <li class="dropdown">
-                <button class="btn btn-primary dropdown-toggle" type="button"
-                        data-toggle="dropdown">
-                    Geozone <span class="caret"></span>
-                </button>
-                <ul class="dropdown-content">
-                    <li><a href="#">Polygon</a></li>
-                    <li><a href="#">Readius</a></li>
-
-                </ul>
-            </li>--}%
-
-
-
             <li><g:link controller="logout" class="button special">Log Out</g:link></li>
         </ul>
     </nav>
@@ -125,89 +101,31 @@
     <div class="container">
 
         <header class="major">
-            <h2>Attendence-Detail</h2>
+            <h4>Device-Information</h4>
 
             <table>
                 <tr>
-                    <th><h4><input type="date" name="date"></h4></th>
-                    <th>Employee-Id</th>
-                    <th>Employee-Name</th>
-                    <th>Company-Name</th>
-                    <th>In-Time</th>
-                    <th>Out-Time</th>
+                   %{-- <th>select   ZoneType</th>--}%
+                    <th>Devicde_ID</th>
+                    %{-- <th>ZoneType</th>--}%
+                    %{--<th>ArrivalZone</th>
+                    <th>DepartureZone</th>
+                    <th>Radius</th>--}%
+                    <th>Latitude</th>
+                    <th>Longitude</th>
                 </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
+                <g:each in="${eventList}" status="i" var="eventInstance">
+
+                    <tr>
+                        <td>${fieldValue(bean: eventInstance,field: "deviceId") }</td>
+                        <td>${fieldValue(bean: eventInstance,field: "latitude") }</td>
+                        <td>${fieldValue(bean: eventInstance,field: "longititude") }</td>
+
+                    </tr>
+                </g:each>
             </table>
-
-
-
-
-
-
-
         </header>
-        <!--
 
-				<div id="googleMap" style="width:100%;height:400px;"></div>
-
-				<script>
-					function myMap() {
-					var mapProp= {
-   					 center:new google.maps.LatLng(51.508742,-0.120850),
-   					 zoom:5,
-					};
-				var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
-					}
-				</script>
-
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAShrIwR7ZBeCkAEKhncD42oEHMtnLCOf4&callback=initMap"></script> -->
 
     </div>
 </section>
@@ -227,8 +145,43 @@
     </div>
 
 </footer>
-<!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA3vSAsZcWtZoXKU9hDt1nKfMrxOqeBo94=myMap"></script> -->
 
+<script>
+
+    function commonAjax(data,url){
+        return $.ajax({
+            url: url,
+            type: 'POST',
+            data: data
+        });
+    }
+
+    console.log(document.getElementById('radio').checked)
+    var x;
+    var validUrl
+    $("input[name='optradio']").change(function(){
+        alert($(this).val())
+        alert($(".view").attr("href"))
+        var url = $(".view").attr("href")
+        alert((validUrl==undefined))
+        if(validUrl==undefined){
+            validUrl = url
+        }
+
+        $(".view").attr("href",validUrl+"/"+$(this).val())
+        x = $(this).val()
+
+        console.log("this is x " + x)
+    });
+
+
+
+
+
+
+
+
+</script>
 
 </body>
 </html>

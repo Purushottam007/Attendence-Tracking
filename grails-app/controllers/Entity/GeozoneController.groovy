@@ -25,16 +25,8 @@ class GeozoneController {
     @Secured(['ROLE_USER','ROLE_ADMIN'])
     def geozone(Integer max){
         params.max = Math.min(max ?: 10, 100)
-    //    println":::::::::::::::::::"+Geozone.list(params)
         render view: 'geozone', model:[geozoneList: Geozone.list(params), geozoneCount: Geozone.count()]
     }
-   /* @Secured(['ROLE_USER','ROLE_ADMIN'])
-    def gt() {
-        def g=params.gtt
-
-        println("ttttttttttttttttt"+g)
-        render "hello"
-    }*/
 
 
     @Secured(['ROLE_USER','ROLE_ADMIN'])
@@ -43,26 +35,17 @@ class GeozoneController {
         def cr=params.st;
         def rad=params.stt
         def rect=params.stcnt;
-        println"gggggggggggggg"+rect
-//        println"sssssssssssssssssssssss"+path
 
 
-//println"hhhhhhhhhhh"+(bound!='undefined')
-   //     println"sddddddddddddd"+(path!='undefined')
+
+
         def ar
+
         if(path!='undefined'){
              ar=path.trim().split(" ")
-      //      println("XXXXXXXXXXXXXXXXXX"+(ar).toString())
+
 
         }
-
-
-
-    //    println"ddddddddd"+ar[0]
-
-
-
-           // println"oooooooooooooooooooooo"+bound
         else if(cr!='undefined'){
 
              ar=cr.trim().split(" ")
@@ -71,38 +54,30 @@ class GeozoneController {
         else if(rect!='undefined'){
             ar=rect.trim().split(" ")
         }
+       /* else if(point!='undefined'){
+            ar=rect.trim().split(" ")
+        }*/
 
 
-        //println"bounds"+arr[0]
+
         Geozone geozone=new Geozone();
+     //   EventData eventData=new EventData()
 
 
-        String[] lat = new String[10];
-        String[] lng = new String[10];
+        String[] lat = new String[15];
+        String[] lng = new String[15];
         int i =0;
-       // println"OOOOOOOOOOOOOOOOOOOOO"+ar.size()
-        //println("array value"+Arrays.toString(ar))
+
         for(int j=0 ;j<ar.size(); j++){
-         //   lat[j] = "fffffffffffffffff"+ar[j]
 
-
-
-
-            println"///////////"+ar[j]
            def g= ar[j].split(",")
-            println"Lat: $j "+g[0]+", Lng:  "+g[1]
             lat[i]=g[0]
-            println("lat[$j]"+lat[0])
             lng[i]=g[1]
-            println("lng[$j]"+lng[0])
-
             j=j+1
             i = i+1
-
-
-
-
         }
+
+
 
 
         geozone.latitude1=lat[0]
@@ -139,14 +114,16 @@ class GeozoneController {
 
 
 
+
+
+
+
         geozone.setCompany(Company.findById(1))
         geozone.save(failOnError:true);
-
-        render status:200
+        println"lllll="+ geozone.getId()
+        render geozone.getId()
+        //render view: '/form',model: [xyz:geozone.getId()]
     }
-
-
-
 
 
 
@@ -161,23 +138,13 @@ class GeozoneController {
     }*/
    @Secured(['ROLE_USER','ROLE_ADMIN'])
     def form() {
-        println"kkkkkkk"+params
-
        Geozone geozone=Geozone.findById(params.id)
-
-       println"jjjjjjjjjjj"+geozone?.latitude1
-
-       render view: 'form', model:[geozoneInstance: geozone]
+       render view: '/form', model:[geozoneInstance: geozone]
     }
 
-   /* @Secured(['ROLE_USER','ROLE_ADMIN'])
-    def forms() {
+  def gservice(){
 
-
-        render view: 'form'
-    }
-*/
-
+  }
 
 
     def show(Geozone geozone) {

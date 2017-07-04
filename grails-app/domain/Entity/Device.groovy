@@ -9,5 +9,8 @@ class Device {
     static hasMany = [event:EventData]
 
     static constraints = {
+
+        deviceId(nullable: true,blank:true)
+        deviceName(nullable: true,blank:true)
     }
 }

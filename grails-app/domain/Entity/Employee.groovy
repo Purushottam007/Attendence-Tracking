@@ -28,6 +28,10 @@ class Employee extends User{
         employeeMail(nullable: true)
         employeeMobile(nullable: true)
         employeeDob(nullable: true,blank: true)
+        employeeId(nullable: true,blank: true)
+        employeeName(nullable: true,blank: true)
+        employeeDeptName(nullable: true,blank: true)
+        deviceId(nullable: true,blank: true)
     }
 
     static mapping = {

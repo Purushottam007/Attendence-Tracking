@@ -24,6 +24,8 @@
         background-color: #dddddd;
     }
     </style>
+
+
     <meta charset="UTF-8">
     <title>Generic - Transit by TEMPLATED</title>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
@@ -56,13 +58,12 @@
     <script src="js/init.js"></script>
     %{--<noscript>
 --}%
-        <asset:stylesheet src="drop.css"/>
-        <asset:stylesheet src="style.css"/>
-        <asset:stylesheet src="style-xlarge.css"/>
-
-       %{-- <link rel="stylesheet" href="drop.css" />
-        <link rel="stylesheet" href="style.css" />
-        <link rel="stylesheet" href="style-xlarge.css" />--}%
+    <asset:stylesheet src="drop.css"/>
+    <asset:stylesheet src="style.css"/>
+    <asset:stylesheet src="style-xlarge.css"/>
+    <link rel="stylesheet" href="drop.css" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="style-xlarge.css" />
     %{--</noscript>--}%
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet"
@@ -90,32 +91,24 @@
                         data-toggle="dropdown">
                     Adminstration <span class="caret"></span>
                 </button>
-                <ul class="dropdown-content">
-                    <li><a href="#">Employee</a></li>
-                    <li><g:link controller="Company" action="camp">Company</g:link></li>
+                <ul class="dropdown-menu">
+                    <li style="color: red;"><a href="#">Employee-Admin</a></li>
+                    <li><a href="#">Company-Admin</a></li>
 
-                    <li><g:link controller="Geozone" action="Geozone">geozone</g:link></li>
-                    <li><g:link controller="eventData" action="eventList">event</g:link></li>
                 </ul>
-
             </li>
-
-
-           %{-- <li class="dropdown">
+            <li class="dropdown">
                 <button class="btn btn-primary dropdown-toggle" type="button"
                         data-toggle="dropdown">
                     Geozone <span class="caret"></span>
                 </button>
-                <ul class="dropdown-content">
+                <ul class="dropdown-menu">
                     <li><a href="#">Polygon</a></li>
                     <li><a href="#">Readius</a></li>
 
                 </ul>
-            </li>--}%
-
-
-
-            <li><g:link controller="logout" class="button special">Log Out</g:link></li>
+            </li>
+            <li><a href="home.html" class="button special">Log Out</a></li>
         </ul>
     </nav>
 </header>
@@ -125,89 +118,70 @@
     <div class="container">
 
         <header class="major">
-            <h2>Attendence-Detail</h2>
-
-            <table>
-                <tr>
-                    <th><h4><input type="date" name="date"></h4></th>
-                    <th>Employee-Id</th>
-                    <th>Employee-Name</th>
-                    <th>Company-Name</th>
-                    <th>In-Time</th>
-                    <th>Out-Time</th>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-            </table>
-
-
-
-
-
-
+            <h2>Company-Admin</h2>
 
         </header>
-        <!--
 
-				<div id="googleMap" style="width:100%;height:400px;"></div>
 
-				<script>
-					function myMap() {
-					var mapProp= {
-   					 center:new google.maps.LatLng(51.508742,-0.120850),
-   					 zoom:5,
+        <!-- <div id="googleMap" style="width: 100%; height: 400px;"></div>
+
+			<script>
+				function myMap() {
+					var mapProp = {
+						center : new google.maps.LatLng(51.508742, -0.120850),
+						zoom : 5,
 					};
-				var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
-					}
-				</script>
+					var map = new google.maps.Map(document
+							.getElementById("googleMap"), mapProp);
+				}
+			</script>
 
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAShrIwR7ZBeCkAEKhncD42oEHMtnLCOf4&callback=initMap"></script> -->
+			<script
+				src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAShrIwR7ZBeCkAEKhncD42oEHMtnLCOf4&callback=initMap"></script> -->
+
+
+        <table>
+            <tr>
+                <th>Company-Id</th>
+                <th>Company-Name</th>
+                <th>Company-Address</th>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </table>
+
+
+
+
+
 
     </div>
 </section>
