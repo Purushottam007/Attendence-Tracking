@@ -1,4 +1,4 @@
-package Entity
+    package Entity
 
 
 import com.user.User
@@ -14,7 +14,8 @@ class Employee extends User{
     String employeeMobile
     String employeeDob
     String employeeDeptName
-    String deviceId
+    AttendanceDetail active
+ //   String deviceId
 
    static belongsTo=[company:Company]
     static hasMany=[deptname:Department,
@@ -31,7 +32,7 @@ class Employee extends User{
         employeeId(nullable: true,blank: true)
         employeeName(nullable: true,blank: true)
         employeeDeptName(nullable: true,blank: true)
-        deviceId(nullable: true,blank: true)
+   //     deviceId(nullable: true,blank: true)
     }
 
     static mapping = {

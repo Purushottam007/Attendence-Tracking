@@ -10,7 +10,7 @@ class GeogoneService {
 
 
 
-    public static boolean isInside(double rad, double lat2, double lon2, double lat1, double lon1) {
+    public static String isInside(double rad, double lat2, double lon2, double lat1, double lon1) {
 
         double R = 6371e3; // metres
         double a1 = Math.toRadians(lat1);
@@ -28,17 +28,16 @@ class GeogoneService {
         System.out.println("distance=" + e);
         if (e <= rad) {
             System.out.println("inside the circle");
-            return true;
+
+            return "in";
         } else {
             System.out.println("outside the circle");
-            return false;
+            Date di=new Date()
+            println"date="+di
+            return "out";
         }
 
 
     }
-
-
-
-
 
 }

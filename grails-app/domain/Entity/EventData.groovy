@@ -1,6 +1,6 @@
 package Entity
 
-import java.sql.Time
+//import java.sql.Time
 import com.user.geozoneService.GeogoneService
 
 class EventData {
@@ -8,14 +8,14 @@ class EventData {
 
     Integer companyId
 
-    Time timeStamp
+    String timeStamp
     String statusCode
     String latitude
     String longititude
     String gpsAge
     String geozoneIndex
     String geozoneId
-    Time creationTime
+    String creationTime
 
     static belongsTo=[device:Device]
 

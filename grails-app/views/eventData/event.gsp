@@ -105,14 +105,10 @@
 
             <table>
                 <tr>
-                   %{-- <th>select   ZoneType</th>--}%
                     <th>Devicde_ID</th>
-                    %{-- <th>ZoneType</th>--}%
-                    %{--<th>ArrivalZone</th>
-                    <th>DepartureZone</th>
-                    <th>Radius</th>--}%
                     <th>Latitude</th>
                     <th>Longitude</th>
+                    <th>Status</th>
                 </tr>
                 <g:each in="${eventList}" status="i" var="eventInstance">
 
@@ -120,6 +116,8 @@
                         <td>${fieldValue(bean: eventInstance,field: "deviceId") }</td>
                         <td>${fieldValue(bean: eventInstance,field: "latitude") }</td>
                         <td>${fieldValue(bean: eventInstance,field: "longititude") }</td>
+                        <td>${fieldValue(bean: eventInstance,field: "statusCode") }</td>
+
 
                     </tr>
                 </g:each>

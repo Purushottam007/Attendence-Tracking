@@ -9,7 +9,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <!-- NOTE: two libraries to load are comma-separated; otherwise last mention of the query string arg overwrites the previous -->
     <script type="text/javascript"
-            src="http://maps.google.com/maps/api/js?key=AIzaSyAkJ1SwM7KfvI708M_M-qu6JWmu6bNH7HU&v=3.21.5a&libraries=drawing&signed_in=true&libraries=places,drawing"></script>
+            src="http://maps.google.com/maps/api/js?key=AIzaSyD-6FGDosdwZci-E292lZBvoOuBGtVivic&v=3.21.5a&libraries=drawing&signed_in=true&libraries=places,drawing"></script>
     <style type="text/css">
 
     #map, html, body {
