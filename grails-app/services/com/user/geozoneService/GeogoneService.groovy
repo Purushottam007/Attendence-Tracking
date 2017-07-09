@@ -24,16 +24,9 @@ class GeogoneService {
         double d = 2 * Math.atan2(Math.sqrt(c), Math.sqrt(1 - c));
 
         double e = R * d;
-        System.out.println("------------------------------------------------------------------");
-        System.out.println("distance=" + e);
         if (e <= rad) {
-            System.out.println("inside the circle");
-
             return "in";
         } else {
-            System.out.println("outside the circle");
-            Date di=new Date()
-            println"date="+di
             return "out";
         }
 

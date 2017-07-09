@@ -1,7 +1,7 @@
 package Entity
 
 import com.user.Point
-import com.user.geozoneService.GeogoneService
+import com.user.Position_Point_WRT_Polygon
 import grails.plugin.springsecurity.annotation.Secured
 
 import java.text.SimpleDateFormat
@@ -33,9 +33,6 @@ class EventDataController {
     def event() {
         def point=params.ps
         def id=params.geozone
-       // println"yyyyyyyyyyyyyyyy"+point
-       // println"xxxxxxxxxxxxxxxxxxxxx"+id
-
         def ar
 
         if(point!='undefined') {
@@ -60,8 +57,6 @@ class EventDataController {
 
         def elt=Double.parseDouble(eventData.latitude)
         def elg=Double.parseDouble(eventData.longititude)
-        println"diddddddd="+eventData.id
-        println"diddddddd="+eventData.deviceId
 
 
         Geozone geozone= Geozone.findById(id)
@@ -70,105 +65,124 @@ class EventDataController {
         def lg=Double.parseDouble(geozone.longitude1)
         def rd
         def inout
+        def tf
         if(geozone.radious!='undefined') {
             rd = Double.parseDouble(geozone.radious)
             inout= geogoneService.isInside(rd, elt, elg, lt, lg)
            println inout
-
+            eventData.statusCode=inout
         }else {
-            Point pt=new Point()
-            Point[] polygon1 = [new Point(lt,lg), new Point(Double.parseDouble(geozone.latitude2),Double.parseDouble(geozone.longitude2)),
-                                new Point(Double.parseDouble(geozone.latitude3),Double.parseDouble(geozone.longitude3)), new Point(Double.parseDouble(geozone.latitude4),Double.parseDouble(geozone.longitude4))];
+            println "polyyyyyyyyyyyyyyy"
+            Position_Point_WRT_Polygon psp = new Position_Point_WRT_Polygon()
+            println "poxxxxxxxxxxxxxxxxxxxxx"
+            Point[] polygon1 = null;
 
-            int n = 10;
-            Point p = new Point(elt,elg);
-            println("Point P(" + p.x + ", " + p.y
-                    + ") lies inside polygon1: " +pt.isInside(polygon1, n, p));
-
+            if (lt != null && lg != null) {
+                //polygon1.apedd(new Point(lt, lg))
+                polygon1 = [new Point(lt, lg)];
+            }
+            println "OOOOOOOOOOOOOOO" + polygon1
+            if (geozone.latitude2 != null && geozone.longitude2 != null) {
+                //polygon1.add(new Point(Double.parseDouble(geozone.latitude2), Double.parseDouble(geozone.longitude2)))
+                polygon1 = appendValue(polygon1, new Point(Double.parseDouble(geozone.latitude2), Double.parseDouble(geozone.longitude2)))
             }
 
-        eventData.statusCode=inout
+            if (geozone.latitude3 != null && geozone.longitude3 != null) {
+                //polygon1.add(new Point(Double.parseDouble(geozone.latitude2), Double.parseDouble(geozone.longitude2)))
+                polygon1 = appendValue(polygon1, new Point(Double.parseDouble(geozone.latitude3), Double.parseDouble(geozone.longitude3)))
+            }
+            if (geozone.latitude4 != null && geozone.longitude4 != null) {
+                //polygon1.add(new Point(Double.parseDouble(geozone.latitude2), Double.parseDouble(geozone.longitude2)))
+                polygon1 = appendValue(polygon1, new Point(Double.parseDouble(geozone.latitude4), Double.parseDouble(geozone.longitude4)))
+            }
+
+            if (geozone.latitude5 != null && geozone.longitude5 != null) {
+                // polygon1.add(new Point(Double.parseDouble(geozone.latitude5), Double.parseDouble(geozone.longitude5)))
+                polygon1 = appendValue(polygon1, new Point(Double.parseDouble(geozone.latitude5), Double.parseDouble(geozone.longitude5)))
+            }
+            if (geozone.latitude6 != null && geozone.longitude6 != null) {
+                //polygon1.add(new Point(Double.parseDouble(geozone.latitude6), Double.parseDouble(geozone.longitude6)))
+                polygon1 = appendValue(polygon1, new Point(Double.parseDouble(geozone.latitude6), Double.parseDouble(geozone.longitude6)))
+            }
+            if (geozone.latitude7 != null && geozone.longitude7 != null) {
+                //polygon1.add(new Point(Double.parseDouble(geozone.latitude6), Double.parseDouble(geozone.longitude6)))
+                polygon1 = appendValue(polygon1, new Point(Double.parseDouble(geozone.latitude7), Double.parseDouble(geozone.longitude7)))
+            }
+            if (geozone.latitude8 != null && geozone.longitude8 != null) {
+                //polygon1.add(new Point(Double.parseDouble(geozone.latitude6), Double.parseDouble(geozone.longitude6)))
+                polygon1 = appendValue(polygon1, new Point(Double.parseDouble(geozone.latitude8), Double.parseDouble(geozone.longitude8)))
+            }
+            if (geozone.latitude9 != null && geozone.longitude9 != null) {
+                //polygon1.add(new Point(Double.parseDouble(geozone.latitude6), Double.parseDouble(geozone.longitude6)))
+                polygon1 = appendValue(polygon1, new Point(Double.parseDouble(geozone.latitude9), Double.parseDouble(geozone.longitude9)))
+            }
+            if (geozone.latitude10 != null && geozone.longitude10 != null) {
+                //polygon1.add(new Point(Double.parseDouble(geozone.latitude6), Double.parseDouble(geozone.longitude6)))
+                polygon1 = appendValue(polygon1, new Point(Double.parseDouble(geozone.latitude10), Double.parseDouble(geozone.longitude10)))
+            }
+
+            println "size=" + polygon1.size()
+            int n = polygon1.size();
+            println "nnnnnnnnnnn" + n
+            Point p = new Point(elt, elg);
+            println("Point P(" + p.x + ", " + p.y
+                    + ") lies inside polygon1: " + psp.isInside(polygon1, n, p));
+            tf = psp.isInside(polygon1, n, p)
+            println "ZZZZZZZZZZZZ" + tf
+
+
+            if (tf == true) {
+                println "xxxxxxxxxxxxxxxxxx" + tf
+                eventData.statusCode = "in"
+            } else {
+                eventData.statusCode = "out"
+            }
+        }
         eventData.setDevice(Device.findById(1))
         eventData.save(failOnError:true);
 
-        println"eid="+ eventData.getId()
         def st=eventData.getStatusCode()
 
-        def intt
-        def outt
+        def intime
+        def outime
 
-
-
-        println"did="+ eventData.deviceId.getClass()
         Device dev = Device.findById(eventData.deviceId)
-        println"emppppppppp="+dev
-        println"kkkkkk"+dev.employeeId
         def index = dev.employeeId
         Employee emp = new Employee()
-        /*println("#########"+Employee.list().size())
-        def empList = Employee.list()
-        println"listttttttttt="+empList*/
 
-        println"fffffff"+emp
-       // println("@@@@@@@@@@"+emp.getEmployeeName())
-        println"llllllllllllll"+Employee.get(dev.employeeId)
         Employee employee = Employee.get(dev.employeeId)
 
 
         def t2=new SimpleDateFormat("dd/MM/yyyy").format(Calendar.getInstance().getTime());
 
-
-
         if(st=='in'){
             AttendanceDetail attendanceDetail=new AttendanceDetail()
-            intt=new SimpleDateFormat(" HH:mm:ss").format(Calendar.getInstance().getTime());
-            println"XXXXXXXXXXXXXXXX"+intt
+            intime=new SimpleDateFormat(" HH:mm:ss").format(Calendar.getInstance().getTime());
+           // println"XXXXXXXXXXXXXXXX"+intt
 
-            attendanceDetail.logIntime=intt
+            attendanceDetail.logIntime=intime
 
             attendanceDetail.attendanceDate=t2
 
 
-            println";;;;;;;dddddd"+attendanceDetail.validate()
+           // println";;;;;;;dddddd"+attendanceDetail.validate()
             attendanceDetail.save(flush: true,failOnError:true)
 
             employee.addToAttendance(attendanceDetail)
             employee.active = attendanceDetail
         }else{
-            println"sttttttttt"
             AttendanceDetail attendanceDetail = employee.active
-            println"LLLLLLLLLLLLLLLLLLLLLLL"+attendanceDetail
-            if(attendanceDetail){
-                outt=new SimpleDateFormat(" HH:mm:ss").format(Calendar.getInstance().getTime());
-                println"outimeeeeeeeeee"+outt
-                attendanceDetail.logOuttime = outt
+                if(attendanceDetail){
+                    outime=new SimpleDateFormat(" HH:mm:ss").format(Calendar.getInstance().getTime());
+                attendanceDetail.logOuttime = outime
                 attendanceDetail.save(flush:true)
-                println"outttttttttttttttttt"+attendanceDetail.logOuttime
-            }
+                            }
 
         }
 
+         employee.save(flush: true,failOnError:true)
 
-
-
-       /* attendanceDetail.logIntime=intt
-        attendanceDetail.logOuttime=outt
-        attendanceDetail.attendanceDate=t2
-
-
-        println";;;;;;;dddddd"+attendanceDetail.validate()
-        attendanceDetail.save(flush: true,failOnError:true)
-
-        employee.addToAttendance(attendanceDetail)*/
-      //  employee.active = attendanceDetail
-
-        employee.save(flush: true,failOnError:true)
-
-      //  println";;;;;;;;;;;;;;;;;"+employee.attendance
-
-
-        render status:200
-
+         render status:200
 
     }
 
@@ -209,6 +223,14 @@ class EventDataController {
 
     def edit(EventData eventData) {
         respond eventData
+    }
+
+    private Object[] appendValue(Object[] obj, Object newObj) {
+
+        ArrayList<Object> temp = new ArrayList<Object>(Arrays.asList(obj));
+        temp.add(newObj);
+        return temp.toArray();
+
     }
 
     @Transactional
