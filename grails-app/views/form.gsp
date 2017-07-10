@@ -169,33 +169,16 @@
         if (typeof selectedShape.getRadius == 'function') {
             radstr = "" + selectedShape.getRadius();
 
-            console.log('hello this is radius'+radstr)
+            console.log('hello this is radius' + radstr)
         }
 
-/*if(posstr!='undefined'||radstr!='undefined'||cntstr!='undefined')
-{
-       var eventsUrl = '${createLink(action:'events',controller:'eventData')}';
-
-        var locData = {pss: posstr, stts: radstr, stcnts: cntstr}
-        commonAjax(locData, eventsUrl).done(function (response) {
-            alert(locData)
-            if (response == true || response == 'true') {
-                alert('Data saved Successfully');
-
-            }
-
-        }*/
-
-
-
-
-if(posstr!='undefined') {
+        if(posstr!='undefined') {
     var eventUrl = '${createLink(action:'event',controller:'eventData')}';
     var geozoneid = $("input[name='geozonid']").val();
-alert('kkkk'+geozoneid);
+//alert('kkkk'+geozoneid);
     var locData = {ps: posstr,geozone:geozoneid}
     commonAjax(locData, eventUrl).done(function (response) {
-        alert(locData)
+      //alert(locData)
         if (response == true || response == 'true') {
             alert('Data saved Successfully');
 
@@ -211,9 +194,9 @@ else {
 
     var locData = {str: pathstr, st: cntrstr, stt: radstr, stcnt: cntstr}
     commonAjax(locData, url).done(function (response) {
-        alert(locData)
-        alert('ooooooooooooo');
-        alert(response);
+      //  alert(locData)
+      //  alert('ooooooooooooo');
+      //  alert(response);
         $("input[name='geozonid']").val(response);
         if (response == true || response == 'true') {
             alert('Data saved Successfully');
@@ -226,10 +209,6 @@ else {
         } );
 
 }
-
-
-
-
 
         curseldiv.innerHTML = "<b>cursel</b>: " + selectedShape.type + " " + selectedShape + "; <i>pos</i>: " + posstr + " ; <i>path</i>: " + pathstr + " ; <i>bounds</i>: " + bndstr + " ; <i>Cb</i>: " + cntstr + " ; <i>radius</i>: " + radstr + " ; <i>Cr</i>: " + cntrstr ;
 
@@ -326,7 +305,7 @@ else {
         input.value = ''; // clear the box too
     }
 
-    $( document ).ready(function() {
+    /*$( document ).ready(function() {
         console.log( "ready!" );
         map = new google.maps.Map(document.getElementById("map"));
 
@@ -401,7 +380,7 @@ function lat() {
     });
     mapPoly.setMap(map);
 
-}
+}*/
 
 
 
