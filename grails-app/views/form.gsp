@@ -175,8 +175,19 @@
         if(posstr!='undefined') {
     var eventUrl = '${createLink(action:'event',controller:'eventData')}';
     var geozoneid = $("input[name='geozonid']").val();
+            var employeeId =  '${params.emplyeeId}';
+
+            alert(employeeId)
+
+
 //alert('kkkk'+geozoneid);
-    var locData = {ps: posstr,geozone:geozoneid}
+    var locData = {ps: posstr,geozone:geozoneid,emp:'${params.emplyeeId}'}
+            if(employeeId){
+                locData['employeeId'] = employeeId;
+            }
+            console.log(locData)
+
+
     commonAjax(locData, eventUrl).done(function (response) {
       //alert(locData)
         if (response == true || response == 'true') {
@@ -191,8 +202,15 @@ else {
 
 
     var url = '${createLink(action:'ft',controller:'geozone')}';
+           // var empoyeeid= '${userId}'//$("input[name='empoyeeid']").val();
+    var companyId =  '${params.companyId}';
+    alert(companyId);
 
     var locData = {str: pathstr, st: cntrstr, stt: radstr, stcnt: cntstr}
+    if(companyId){
+        locData['companyId'] = companyId;
+    }
+    console.log(locData)
     commonAjax(locData, url).done(function (response) {
       //  alert(locData)
       //  alert('ooooooooooooo');
@@ -520,6 +538,7 @@ function lat() {
 <div id="panel">
     <div id="color-palette"></div>
     <g:hiddenField name="geozonid" />
+    <g:hiddenField name="deviceId" />
     <div>
         <button id="delete-button">Delete Selected Shape</button>
     </div>

@@ -7,6 +7,7 @@ import grails.transaction.Transactional
 
 @Transactional(readOnly = true)
 class GeozoneController {
+    def springSecurityService
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
@@ -31,10 +32,16 @@ class GeozoneController {
 
     @Secured(['ROLE_USER','ROLE_ADMIN'])
     def ft(){
+        println"LLLLLLLLLLLL"+params
         def path=params.str;
         def cr=params.st;
         def rad=params.stt
         def rect=params.stcnt;
+
+ /*       println"OOOOOOOOOOOOOOOOO"+params
+        def user = springSecurityService.currentUser
+        println"EEEEEEEEEEEEEEE"+user.id*/
+
 
 
 
@@ -64,8 +71,8 @@ class GeozoneController {
      //   EventData eventData=new EventData()
 
 
-        String[] lat = new String[15];
-        String[] lng = new String[15];
+        String[] lat = new String[10];
+        String[] lng = new String[10];
         int i =0;
 
         for(int j=0 ;j<ar.size(); j++){
@@ -112,21 +119,27 @@ class GeozoneController {
 
         geozone.radious=rad
 
+        Company company=Company.findById(params.companyId)
+        if(company){
+            geozone.company=company
+            //company.geozone = geozone
+        }
 
+       println"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"+ geozone
 
+        println"BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB"+
 
-
-
-
-        geozone.setCompany(Company.findById(1))
+               //geozone.setCompany(Company.findById(1))
         geozone.save(failOnError:true);
         println"lllll="+ geozone.getId()
+        if(company){
+            company.geozone = geozone
+            company.save(flush:true)
+        }
         render geozone.getId()
+
         //render view: '/form',model: [xyz:geozone.getId()]
     }
-
-
-
 
 
 
@@ -138,7 +151,12 @@ class GeozoneController {
     }*/
    @Secured(['ROLE_USER','ROLE_ADMIN'])
     def form() {
+
+       println"RRRRRRRRRRRRRRRRR"+params
        Geozone geozone=Geozone.findById(params.id)
+       /*println"OOOOOOOOOOOOOOOOO"+params.empid
+       def user = springSecurityService.currentUser
+       println"EEEEEEEEEEEEEEE"+user.id*/
        render view: '/form', model:[geozoneInstance: geozone]
     }
 

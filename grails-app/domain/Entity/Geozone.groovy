@@ -63,13 +63,14 @@ class Geozone {
     Time creationTime
   //  String CenterLatitude
   //  String CenterLongitude
+    Company company
 
 
 
 
 
 
-    static belongsTo=[company:Company]
+  //  static belongsTo=[company:Company]
 
     static constraints = {
         sortId(nullable: true,blank: true)
@@ -129,6 +130,8 @@ class Geozone {
       //  CenterLongitude(nullable: true,blank:true)
         country(nullable: true,blank:true)
        geozoneId(nullable: true,blank:true)
+        company(nullable: true,blank:true)
+
     }
 
 

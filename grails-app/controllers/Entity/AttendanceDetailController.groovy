@@ -13,6 +13,9 @@ class AttendanceDetailController {
         respond AttendanceDetail.list(params), model:[attendanceDetailCount: AttendanceDetail.count()]
     }
 
+
+
+
     def show(AttendanceDetail attendanceDetail) {
         respond attendanceDetail
     }

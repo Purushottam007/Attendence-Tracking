@@ -2,18 +2,18 @@ package Entity
 
 class Company {
 
-     Integer companyId
+    // Integer companyId
      String companyName
      String companyAddress
      String companyMail
      String companyNumber
      String companyWebsite
-
+    Geozone   geozone
 
     static hasMany=[employeedetail:Employee,
                     addresses:Address,
-                    geozone:Geozone,
                     event:EventData]
+    //static hasOne=[geozone:Geozone]
 
 
     static constraints = {
@@ -23,6 +23,7 @@ class Company {
         companyMail(nullable: true,blank: false)
         companyNumber(nullable: true,blank:false)
         companyWebsite(nullable: true,blank: true)
+        geozone(nullable: true,blank: true)
 
     }
 }

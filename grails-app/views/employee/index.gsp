@@ -18,7 +18,49 @@
             <g:if test="${flash.message}">
                 <div class="message" role="status">${flash.message}</div>
             </g:if>
-            <f:table collection="${employeeList}" />
+
+            <table>
+                <thead>
+                <tr>
+
+                    <g:sortableColumn property="middleName" title="${message(code: 'employee.middleName.label', default: 'UserName')}" />
+
+                    <g:sortableColumn property="company" title="${message(code: 'employee.company.label', default: 'Employee-Address')}" />
+
+                    <g:sortableColumn property="firstName" title="${message(code: 'employee.firstName.label', default: 'Employee-mail')}" />
+
+                    <g:sortableColumn property="lastName" title="${message(code: 'employee.lastName.label', default: 'Emplyee-Mobile')}" />
+
+                    <g:sortableColumn property="position" title="${message(code: 'employee.position.label', default: 'Employee-DOB')}" />
+
+                    <g:sortableColumn property="position" title="${message(code: 'employee.position.label', default: 'Employee-id')}" />
+                    <th>Action</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                ${empList}
+                <g:each in="${empList}" status="i" var="empInstance">
+
+                    <tr>
+
+                        <td>${fieldValue(bean: empInstance,field: "username") }</td>
+                        <td>${fieldValue(bean: empInstance,field: "employeeAddress") }</td>
+                        <td>${fieldValue(bean: empInstance,field: "employeeMail") }</td>
+                        <td>${fieldValue(bean: empInstance,field: "employeeMobile") }</td>
+                        <td>${fieldValue(bean: empInstance,field: "employeeDob") }</td>
+                        <td>${fieldValue(bean: empInstance,field: "id") }</td>
+                        <td><g:link action="form" controller="geozone" params="[emplyeeId:empInstance.id,companyId:empInstance.company?.id]">Create Geozon</g:link></td>
+                    </tr>
+
+                </g:each>
+
+                </tbody>
+            </table>
+
+
+
+            %{--<f:table collection="${employeeList}" />--}%
 
             <div class="pagination">
                 <g:paginate total="${employeeCount ?: 0}" />

@@ -17,8 +17,8 @@ class CompanyController {
     @Secured(['ROLE_USER','ROLE_ADMIN'])
     def camp(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        respond Company.list(params), model:[companyCount: Company.count()]
-        render view: 'index'
+     /*   respond Company.list(params), model:[companyCount: Company.count()]*/
+        render view: 'index',model:[companyList:Company.list(params),companyCount: Company.count()]
     }
     @Secured(['ROLE_USER','ROLE_ADMIN'])
     def show(Company company) {

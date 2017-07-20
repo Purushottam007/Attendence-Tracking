@@ -16,6 +16,20 @@
         <script src="js/skel.min.js"></script>
         <script src="js/skel-layers.min.js"></script>
         <script src="js/init.js"></script>
+
+
+
+        <script>function commonAjax(data,url){
+            return $.ajax({
+                url: url,
+                type: 'POST',
+                data: data
+
+
+            });
+        }</script>
+
+
         %{--<noscript>
     --}%
         <asset:stylesheet src="drop.css"/>
@@ -57,8 +71,48 @@
             <g:if test="${flash.message}">
                 <div class="message" role="status">${flash.message}</div>
             </g:if>
-            <f:table collection="${companyList}" />
+           %{-- <f:table collection="${companyList}" />--}%
 
+            <table>
+                <thead>
+                <tr>
+
+                    <g:sortableColumn property="middleName" title="${message(code: 'employee.middleName.label', default: 'Company Address')}" />
+
+                    <g:sortableColumn property="age" title="${message(code: 'employee.age.label', default: 'Company Mail')}" />
+
+                    <g:sortableColumn property="company" title="${message(code: 'employee.company.label', default: 'Company Number')}" />
+
+                    <g:sortableColumn property="firstName" title="${message(code: 'employee.firstName.label', default: 'Company Website')}" />
+
+                    <g:sortableColumn property="lastName" title="${message(code: 'employee.lastName.label', default: 'Geozone')}" />
+
+                    <g:sortableColumn property="position" title="${message(code: 'employee.position.label', default: 'Company Id')}" />
+
+                    <g:sortableColumn property="position" title="${message(code: 'employee.position.label', default: 'Addresses')}" />
+                    <th>Action</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                <g:each in="${companyList}" status="i" var="companyInstance">
+
+                    <tr>
+
+                        <td>${fieldValue(bean: companyInstance,field: "companyAddress") }</td>
+                        <td>${fieldValue(bean: companyInstance,field: "companyMail") }</td>--}
+                        <td>${fieldValue(bean: companyInstance,field: "companyNumber") }</td>
+                        <td>${fieldValue(bean: companyInstance,field: "companyWebsite") }</td>
+                        <td>${fieldValue(bean: companyInstance,field: "geozone") }</td>
+                        <td>${fieldValue(bean: companyInstance,field: "id") }</td>
+                        <td></td>
+                        <td><g:link action="form" controller="geozone" params="[companyId:companyInstance.id]">Create Geozon</g:link></td>
+                    </tr>
+
+                </g:each>
+
+                </tbody>
+            </table>
             <div class="pagination">
                 <g:paginate total="${companyCount ?: 0}" />
             </div>

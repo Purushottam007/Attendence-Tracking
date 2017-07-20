@@ -1,9 +1,5 @@
-    package Entity
-
-
+package Entity
 import com.user.User
-
-
 class Employee extends User{
 
     Integer employeeId
@@ -15,9 +11,11 @@ class Employee extends User{
     String employeeDob
     String employeeDeptName
     AttendanceDetail active
+    Device activeDevice
  //   String deviceId
+    Company company
 
-   static belongsTo=[company:Company]
+  // static belongsTo=[Company:Company]
     static hasMany=[deptname:Department,
                     addresses:Address,
                     attendance:AttendanceDetail,
@@ -32,6 +30,9 @@ class Employee extends User{
         employeeId(nullable: true,blank: true)
         employeeName(nullable: true,blank: true)
         employeeDeptName(nullable: true,blank: true)
+        active(nullable: true,blank: true)
+        company(nullable: true,blank: true)
+        activeDevice(nullable: true,blank: true)
    //     deviceId(nullable: true,blank: true)
     }
 

@@ -12,8 +12,18 @@ class EmployeeController {
     @Secured(['ROLE_USER','ROLE_ADMIN'])
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        respond Employee.list(params), model:[employeeCount: Employee.count()]
+        println("employeeeeeeee"+Employee.list(params))
+        render view: 'index' , model:[empList:Employee.list(params),employeeCount: Employee.count()]
     }
+    @Secured(['ROLE_USER','ROLE_ADMIN'])
+    def emp(Integer max) {
+
+        render view: 'index',model:[empList:Employee.list(params),employeeCount: Employee.count()]
+    }
+
+
+
+
     @Secured(['ROLE_USER','ROLE_ADMIN'])
     def show(Employee employee) {
         respond employee
