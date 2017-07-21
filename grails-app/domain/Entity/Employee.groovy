@@ -21,6 +21,19 @@ class Employee extends User{
                     attendance:AttendanceDetail,
                     device:Device]
 
+
+
+    static namedQueries = {
+
+        findByAttendance { attendanceId ->
+
+            attendance { eq 'id', attendanceId }
+
+        }
+
+
+    }
+
     static constraints = {
 
         employeeAddress(nullable: true,blank: true)

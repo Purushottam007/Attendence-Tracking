@@ -13,6 +13,7 @@ class EmployeeController {
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         println("employeeeeeeee"+Employee.list(params))
+
         render view: 'index' , model:[empList:Employee.list(params),employeeCount: Employee.count()]
     }
     @Secured(['ROLE_USER','ROLE_ADMIN'])

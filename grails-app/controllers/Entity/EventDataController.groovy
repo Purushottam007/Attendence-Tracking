@@ -119,6 +119,8 @@ println"ggggggggkkkkkkkkk"+dev.employeeId
         }
 
          employee.save(flush: true,failOnError:true)
+       // println"TTTTTTTTTTRRRRRRRRTTTT"+employee.active.logIntime
+      // println"TTTTTTTTTTRRRRRRRRTTTT"+employee.active.logOuttime
 
          render status:200
 

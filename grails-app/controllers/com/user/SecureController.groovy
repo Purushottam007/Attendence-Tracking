@@ -10,6 +10,13 @@ class SecureController {
    // @Secured('ROLE_ADMIN')
     def index() {
 
+/*       println("xxxxxxxxxxx"+AttendanceDetail.list())
+        def atte = AttendanceDetail.list().id
+       println("yyyyyy"+atte)
+       def emppatt = Employee.list()
+       println("ddddddddddddddddd"+emppatt.id)
+       println("ttttttt"+emppatt.attendance.id.get(1))*/
+
         render view:  'menu',model:[attendanceList: AttendanceDetail.list(params), attendanceDetailCount: AttendanceDetail.count(),empList:Employee.list(params),employeeCount: Employee.count()]
 
     }

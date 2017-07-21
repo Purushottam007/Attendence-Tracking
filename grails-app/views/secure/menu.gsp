@@ -285,28 +285,95 @@
 </div>
 
 
+<div class="col-sm-12" style="padding: 0 0 0 0; background-color: #f28c38">
+    <div class="col-sm-2" style="border:1px solid white; padding: 10px"><a href="/secure/superAdmin?sort=companyName&max=4&order=asc" style="color: #f2f2f2; text-decoration: none">Employee-Id</a></div>
+    <div class="col-sm-2" style="border:1px solid white; padding: 10px"><a href="/secure/superAdmin?sort=taxId&max=4&order=asc" style="color: #f2f2f2; text-decoration: none">Employee-Name</a></div>
+    <div class="col-sm-2" style="border:1px solid white; padding: 10px"><a href="/secure/superAdmin?sort=companyStatus&max=4&order=asc" style="color: #f2f2f2; text-decoration: none">Date</a></div>
+    <div class="col-sm-2" style="border:1px solid white; padding: 10px"><a href="/secure/superAdmin?sort=registrationNo&max=4&order=asc" style="color: #f2f2f2; text-decoration: none">Login_Time</a></div>
+    <div class="col-sm-2" style="border:1px solid white; padding: 10px"><a href="/secure/superAdmin?sort=totalEmployee&max=4&order=asc" style="color: #f2f2f2; text-decoration: none">Logout_Time</a></div>
+    <div class="col-sm-2" style="border:1px solid white; padding: 10px"><a href="/secure/superAdmin?sort=email&max=4&order=asc" style="color: #f2f2f2; text-decoration: none">Total-Time</a></div>
 
-<g:form name="attendance" controller="secure" action="index">
+</div>
 
 
+
+<g:form name="showForm" controller="modify" action="company">
+
+    %{--<g:each in="${attendanceList}" var="atnd">
+        <g:set var="employee" value="${Entity.Employee.findByAttendance(atnd.id).get()}" />
+        <p>${atnd.attendanceDate},${atnd.logIntime}, ${atnd.logOuttime}, ${employee.id},${employee.employeeName} </p>
+    </g:each>--}%
+
+
+
+
+
+    <g:each in="${attendanceList}" var="atnd">
+        <g:set var="employee" value="${Entity.Employee.findByAttendance(atnd.id).get()}" />
+        <div class="col-sm-12" style="background-color: #f2f2f2; padding: 5px 0 5px 0; border:1px solid white">
+            %{--<div class="col-sm-2" style="padding-left:0px; padding-right:0px">
+                <div class="col-sm-1" style=" padding: 0 0 0 10px"align="center"><input type="radio" id="ohrmList_chkSelectRecord_1" name="radio" value="${company.id}"></div>
+                <div class="col-sm-9" style=" padding: 0 0 0 15px">${company.companyName}</div>
+            </div>--}%
+            <div class="col-sm-2" style="padding: 0 0 0 10px;">${employee.id}</div>
+            <div class="col-sm-2" style="padding: 0 0 0 10px;">${employee.employeeName}</div>
+            <div class="col-sm-2" style="padding: 0 0 0 10px;">${atnd.attendanceDate}</div>
+            <div class="col-sm-2" style="padding: 0 0 0 10px;">${atnd.logIntime}</div>
+            <div class="col-sm-2" style="padding: 0 0 0 10px;">${atnd.logOuttime}</div>
+        </div>
+    </g:each>
+
+    <div class="top, col-sm-12" style="padding: 20px; background-color: white" align="center">
+        <input type="submit" class="btn btn-success" name="modify" value="Show">
+        <input type="submit" class="btn btn-warning" name="modify" value="Edit">
+        <input type="submit" class="btn btn-danger"  name="modify" value="Delete">
+
+    </div>
+    %{--<div class="pagination" role="status" aria-live="polite" style="float: left">Showing ${from} to ${to} of ${companyCount} entries</div>
+    <div class="pagination" style="float: right">
+        <li><g:paginate class="row" style="text-align: center; display: inline;" next="Next" prev="Previous" maxsteps="0" controller="Secure" action="list" total="${companyCount}"/>
+    </div>--}%
+    </div>
+
+</g:form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+%{--<g:form name="attendance" controller="secure" action="index">
+
+<g:each in="${attendanceList}" var="atnd">
+    <g:set var="employee" value="${Entity.Employee.findByAttendance(atnd.id).get()}" />
+    <p>${atnd.attendanceDate},${atnd.logIntime}, ${atnd.logOuttime}, ${employee.id},${employee.employeeName} </p>
+</g:each>
 
 <div class="col-sm-12" style="padding: 0 0 0 0; background-color: #f28c38">
-    %{--<div class="col-sm-3" style="border:1px solid white; padding: 10px"><a href="/secure/superAdmin?sort=companyName&max=4&order=asc" style="color: #f2f2f2; text-decoration: none">Employee-Id</a></div>--}%
+    --}%%{--<div class="col-sm-3" style="border:1px solid white; padding: 10px"><a href="/secure/superAdmin?sort=companyName&max=4&order=asc" style="color: #f2f2f2; text-decoration: none">Employee-Id</a></div>--}%%{--
     <div class="col-sm-1">
         <div class="row">
             <div style="border:1px solid white; padding: 10px"><a href="/secure/superAdmin?sort=companyStatus&max=4&order=asc" style="color: #f2f2f2; text-decoration: none">Employee-Id</a></div>
         </div>
         <g:each in="${empList}" var="empInstance" status="i">
-            <div class="row"><div class="" style="padding: 0 0 0 10px;">${empInstance.id}</div></div>
+            <div class="row"><div class="" style="border:1px solid white;padding: 10px;"><a href="/secure/superAdmin?sort=companyStatus&max=4&order=asc" style="color: #f2f2f2; text-decoration: none">${empInstance.id}</a></div></div>
         </g:each>
     </div>
-    %{--<div class="col-sm-3" style="border:1px solid white; padding: 10px"><a href="/secure/superAdmin?sort=taxId&max=4&order=asc" style="color: #f2f2f2; text-decoration: none">Employee-Name</a></div>--}%
+    --}%%{--<div class="col-sm-3" style="border:1px solid white; padding: 10px"><a href="/secure/superAdmin?sort=taxId&max=4&order=asc" style="color: #f2f2f2; text-decoration: none">Employee-Name</a></div>--}%%{--
     <div class="col-sm-3">
         <div class="row">
             <div style="border:1px solid white; padding: 10px"><a href="/secure/superAdmin?sort=companyStatus&max=4&order=asc" style="color: #f2f2f2; text-decoration: none">Employee-name</a></div>
         </div>
         <g:each in="${empList}" var="empInstance" status="i">
-            <div class="row"><div class="" style="padding: 0 0 0 10px;">${empInstance.employeeName}</div></div>
+            <div class="row"><div class="" style="border:1px solid white;padding: 10px;"><a href="/secure/superAdmin?sort=companyStatus&max=4&order=asc" style="color: #f2f2f2; text-decoration: none">${empInstance.employeeName}</a></div></div>
         </g:each>
     </div>
     <div class="col-sm-2">
@@ -314,7 +381,7 @@
             <div style="border:1px solid white; padding: 10px"><a href="/secure/superAdmin?sort=companyStatus&max=4&order=asc" style="color: #f2f2f2; text-decoration: none">Date</a></div>
         </div>
         <g:each in="${attendanceList}" var="attendanceInstance" status="i">
-            <div class="row"><div class="" style="padding: 0 0 0 10px;">${attendanceInstance.attendanceDate}</div></div>
+            <div class="row"><div class="" style="border:1px solid white;padding: 10px;"><a href="/secure/superAdmin?sort=companyStatus&max=4&order=asc" style="color: #f2f2f2; text-decoration: none">${attendanceInstance.attendanceDate}</a></div></div>
         </g:each>
     </div>
     <div class="col-sm-2">
@@ -322,7 +389,7 @@
             <div style="border:1px solid white; padding: 10px"><a href="/secure/superAdmin?sort=companyStatus&max=4&order=asc" style="color: #f2f2f2; text-decoration: none">LogIn-Time</a></div>
         </div>
         <g:each in="${attendanceList}" var="attendanceInstance" status="i">
-            <div class="row"><div class="" style="padding: 0 0 0 10px;">${attendanceInstance.logIntime}</div></div>
+            <div class="row"><div class="" style="border:1px solid white;padding: 10px;"><a href="/secure/superAdmin?sort=companyStatus&max=4&order=asc" style="color: #f2f2f2; text-decoration: none">${attendanceInstance.logIntime}</a></div></div>
         </g:each>
     </div>
     <div class="col-sm-2">
@@ -330,7 +397,7 @@
         <div style="border:1px solid white; padding: 10px"><a href="/secure/superAdmin?sort=registrationNo&max=4&order=asc" style="color: #f2f2f2; text-decoration: none">LogOut-Time</a></div>
         </div>
         <g:each in="${attendanceList}" var="attendanceInstance" status="i">
-            <div class="row"><div class="" style="padding: 0 0 0 10px;">${attendanceInstance.logOuttime}</div></div>
+            <div class="row"><div class="" style="border:1px solid white;padding: 10px;"><a href="/secure/superAdmin?sort=companyStatus&max=4&order=asc" style="color: #f2f2f2; text-decoration: none">${attendanceInstance.logOuttime}</a></div></div>
         </g:each>
     </div>
     <div class="col-sm-2">
@@ -338,11 +405,11 @@
             <div style="border:1px solid white; padding: 10px"><a href="sort=registrationNo&max=4&order=asc" style="color: #f2f2f2; text-decoration: none">Total-Time</a></div>
         </div>
         <g:each in="${attendanceList}" var="attendanceInstance" status="i">
-            <div class="row"><div class="" style="padding: 0 0 0 10px;">${attendanceInstance.logOuttime}</div></div>
+            <div class="row"><div class="" style="border:1px solid white;padding: 10px;"><a href="/secure/superAdmin?sort=companyStatus&max=4&order=asc" style="color: #f2f2f2; text-decoration: none">${attendanceInstance.logOuttime}</a></div></div>
         </g:each>
     </div>
-    %{--    <div class="col-sm-2" style="border:1px solid white; padding: 10px"><a href="/secure/superAdmin?sort=totalEmployee&max=4&order=asc" style="color: #f2f2f2; text-decoration: none">Total Employee</a></div>
-        <div class="col-sm-2" style="border:1px solid white; padding: 10px"><a href="/secure/superAdmin?sort=email&max=4&order=asc" style="color: #f2f2f2; text-decoration: none">Email</a></div>--}%
+    --}%%{--    <div class="col-sm-2" style="border:1px solid white; padding: 10px"><a href="/secure/superAdmin?sort=totalEmployee&max=4&order=asc" style="color: #f2f2f2; text-decoration: none">Total Employee</a></div>
+        <div class="col-sm-2" style="border:1px solid white; padding: 10px"><a href="/secure/superAdmin?sort=email&max=4&order=asc" style="color: #f2f2f2; text-decoration: none">Email</a></div>--}%%{--
 
 </div>
 
@@ -353,13 +420,13 @@
         <input type="submit" class="btn btn-danger"  name="modify" value="Delete">
 
     </div>
-%{--<div class="pagination" role="status" aria-live="polite" style="float: left">Showing ${from} to ${to} of ${companyCount} entries</div>--}%
-%{-- <div class="pagination" style="float: right">--}
-     --}%%{--<li><g:paginate class="row" style="text-align: center; display: inline;" next="Next" prev="Previous" maxsteps="0" controller="Secure" action="list" total="${companyCount}"/>--}%%{--
- </div>--}%
+--}%%{--<div class="pagination" role="status" aria-live="polite" style="float: left">Showing ${from} to ${to} of ${companyCount} entries</div>--}%%{--
+--}%%{-- <div class="pagination" style="float: right">--}
+     --}%%{----}%%{--<li><g:paginate class="row" style="text-align: center; display: inline;" next="Next" prev="Previous" maxsteps="0" controller="Secure" action="list" total="${companyCount}"/>--}%%{----}%%{--
+ </div>--}%%{--
     </div>
 
-</g:form>
+</g:form>--}%
 </div>
 </body>
 </html>
