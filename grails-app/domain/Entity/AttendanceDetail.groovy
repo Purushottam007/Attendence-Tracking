@@ -4,7 +4,7 @@ import java.sql.Time
 
 class AttendanceDetail {
 
-    String attendanceDate
+    Date attendanceDate
     String logIntime
     String logOuttime
 

@@ -98,7 +98,7 @@ println"ggggggggkkkkkkkkk"+dev.employeeId
 
             attendanceDetail.logIntime=intime
 
-            attendanceDetail.attendanceDate=t2
+            attendanceDetail.attendanceDate=new Date()
 
 
            // println";;;;;;;dddddd"+attendanceDetail.validate()

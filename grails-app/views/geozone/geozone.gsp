@@ -146,7 +146,13 @@
                         <td>${fieldValue(bean: geozoneInstance,field: "longitude1") }</td>
                     </tr>
                 </g:each>
+             %{--<g:paginate controller="geozone" action="geozone" total="${geozoneCount}" />--}%
             </table>
+
+            <div class="pagination" role="status" aria-live="polite" style="float: left">Showing ${from} to ${to} of ${geozoneCount} entries</div>
+            <div class="pagination" style="float: right">
+                <li><g:paginate class="row" style="text-align: center; display: inline;" next="Next" prev="Previous" maxsteps="0" controller="geozone" action="geozone" total="${geozoneCount}"/>
+            </div>
 
           %{-- <li><g:link controller="Geozone" class="button special">Log Out</g:link></li>--}%
 

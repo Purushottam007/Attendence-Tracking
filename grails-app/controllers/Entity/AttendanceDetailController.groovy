@@ -1,5 +1,7 @@
 package Entity
 
+import grails.plugin.springsecurity.annotation.Secured
+
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 
@@ -12,6 +14,10 @@ class AttendanceDetailController {
         params.max = Math.min(max ?: 10, 100)
         respond AttendanceDetail.list(params), model:[attendanceDetailCount: AttendanceDetail.count()]
     }
+    @Secured(['ROLE_USER','ROLE_ADMIN'])
+/*def atList(Integer max){
+    [atd: AttendanceDetail.list(params), attendanceDetailCount: AttendanceDetail.count()]
+}*/
 
 
 

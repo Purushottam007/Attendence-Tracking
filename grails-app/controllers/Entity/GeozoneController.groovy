@@ -25,8 +25,24 @@ class GeozoneController {
 
     @Secured(['ROLE_USER','ROLE_ADMIN'])
     def geozone(Integer max){
-        params.max = Math.min(max ?: 10, 100)
-        render view: 'geozone', model:[geozoneList: Geozone.list(params), geozoneCount: Geozone.count()]
+
+        params.max = Math.min(max ?: 10, 10)
+        Integer from = 0;
+        Integer to = 0;
+        if (!params.offset) {
+            params.offset = "0"
+        }
+        to = Integer.parseInt(params.offset) + params.max
+        for (int i = from; i <= AttendanceDetail.count(); i++) {
+            if (from != AttendanceDetail.count()) {
+                from = Integer.parseInt(params.offset) + 1
+            }
+        }
+        if (to > AttendanceDetail.count()) {
+            to = AttendanceDetail.count()
+        }
+
+        render view: 'geozone', model:[geozoneList: Geozone.list(params), geozoneCount: Geozone.count(),from:from,to:to]
     }
 
 
