@@ -35,7 +35,11 @@ class EventDataController {
         def id=params.geozone
         def empid=params.employeeId
         def ar
-        println"KKKKKKKKKKKKKSSSSSSSSSSSSSSSSSSSSSS="+empid
+
+        def lt;
+        def lot;
+
+
         if(point!='undefined') {
             ar = point.trim().split(" ")
         }
@@ -59,54 +63,39 @@ class EventDataController {
 
 
         Geozone geozone= Geozone.get(id)
-        println("SSSSSSSSSSSSSS"+geozone)
         Employee employee1=Employee.findById(empid)
         Device device = employee1.activeDevice
 
-        println"ZZZZZZZZZZZZZZZZZZZZZZZZZZZZz"+device?.id
-
-       println"AAAAAAAAAAAAAAAA"+eventData.deviceId
         eventData.setDevice(device)
         eventData.save(failOnError:true);
 
         def st=eventData.getStatusCode()
-        println("++++++++++++++++======"+st)
 
         def intime
         def outime
 
         Device dev = Device.findById(eventData.deviceId)
-        println"PPPPPPPPPPPPPP"+dev
         def index = dev.employeeId
-        println"UUUUUUUUUUUUUUUU"+index
-     //   Employee emp = new Employee()
-println"ggggggggkkkkkkkkk"+dev.employeeId
         Employee employee = Employee.findById(dev.employeeId)
-        println"****************************"+employee.activeDevice
 
-     //   println"iiiiiiiiiiooooooossssddiiiii"+employee
 
 
         def t2=new SimpleDateFormat("dd/MM/yyyy").format(Calendar.getInstance().getTime());
 
         if(!employee.activeId && st=='in'){
-           // if(employee.activeId==null){
             AttendanceDetail attendanceDetail=new AttendanceDetail()
             if (attendanceDetail)
             intime=new SimpleDateFormat(" HH:mm:ss").format(Calendar.getInstance().getTime());
-            println"XXXXXXXXXXXXXXXX"+intime
+            lt=intime
 
-            attendanceDetail.logIntime=intime
+            attendanceDetail.logIntime=lt
 
             attendanceDetail.attendanceDate=new Date()
 
-
-           // println";;;;;;;dddddd"+attendanceDetail.validate()
             attendanceDetail.save(flush: true,failOnError:true)
 
            employee.addToAttendance(attendanceDetail)
             employee.active = attendanceDetail
-        //}
         }else if(employee.activeId && st=="out"){
             AttendanceDetail attendanceDetail = employee.active
                 if(attendanceDetail){
@@ -117,16 +106,10 @@ println"ggggggggkkkkkkkkk"+dev.employeeId
                             }
 
         }
-
+        println("GGGGGGGGGGGGGGGGG"+lt)
          employee.save(flush: true,failOnError:true)
-       // println"TTTTTTTTTTRRRRRRRRTTTT"+employee.active.logIntime
-      // println"TTTTTTTTTTRRRRRRRRTTTT"+employee.active.logOuttime
-
          render status:200
-
     }
-
-
 
     def show(EventData eventData) {
         respond eventData

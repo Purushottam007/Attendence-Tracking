@@ -40,7 +40,6 @@ class EventData {
 
     }
     def beforeInsert(){
-        println("XXXXXXXXXXXXXXXXXXX"+geozoneId)
         def geo = Geozone.findById(geozoneId)
 
 
@@ -55,17 +54,13 @@ class EventData {
             def circleradius=Double.parseDouble(geo.radious)
             def ios= geogoneService.isInside(circleradius,pointLatitude,pointLongitude,crLatitude1,crLongitude1)
             statusCode=ios
-            println("TTTTTTTTTTTTTTTTTTTTTT"+statusCode)
         }else {
-            println "polyyyyyyyyyyyyyyy"
             Position_Point_WRT_Polygon psp = new Position_Point_WRT_Polygon()
-            println "poxxxxxxxxxxxxxxxxxxxxx"
             Point[] polygon1 = null;
 
             if (crLatitude1!= null && crLongitude1!= null) {
                 polygon1 = [new Point(crLatitude1, crLongitude1)];
             }
-            println "OOOOOOOOOOOOOOO" + polygon1
             if (geo.latitude2 != null && geo.longitude2 != null) {
                 polygon1 = geogoneService.appendValue(polygon1, new Point(Double.parseDouble(geo.latitude2), Double.parseDouble(geo.longitude2)))
             }
@@ -99,20 +94,20 @@ class EventData {
                 polygon1 = geogoneService.appendValue(polygon1, new Point(Double.parseDouble(geo.latitude10), Double.parseDouble(geo.longitude10)))
             }
 
-            println "size=" + polygon1.size()
+          //  println "size=" + polygon1.size()
             int n = polygon1.size();
-            println "nnnnnnnnnnn" + n
+          //  println "nnnnnnnnnnn" + n
             Point p = new Point(pointLatitude, pointLongitude);
             println("Point P(" + p.x + ", " + p.y
                     + ") lies inside polygon1: " + psp.isInside(polygon1, n, p));
             tf = psp.isInside(polygon1, n, p)
-            println "ZZZZZZZZZZZZ" + tf
+          //  println "ZZZZZZZZZZZZ" + tf
 
 
             if (tf == true) {
-                println "xxxxxxxxxxxxxxxxxx" + tf
+              //  println "xxxxxxxxxxxxxxxxxx" + tf
                 statusCode = "in"
-                println "xxxxxxxxxxxxxxxxxx" + statusCode
+             //   println "xxxxxxxxxxxxxxxxxx" + statusCode
             } else {
                 statusCode = "out"
             }
@@ -124,47 +119,6 @@ class EventData {
     }
 
     def afterInsert(){
-        println"22222222233333335555555"+statusCode
-        def st=statusCode
-       /* def intime
-        def outime
-
-        Device dev = Device.findById(deviceId)
-        def index = dev.employeeId
-    //    Employee emp = new Employee()
-//println"ggggggggkkkkkkkkk"+dev.employeeId
-        Employee employee = Employee.findById(dev.employeeId)
-
-        //   println"iiiiiiiiiiooooooossssddiiiii"+employee
-
-
-        def t2=new SimpleDateFormat("dd/MM/yyyy").format(Calendar.getInstance().getTime());
-
-        if(st=='in'){
-            //   println"NNNNNNNNN"+st
-            AttendanceDetail attendanceDetail=new AttendanceDetail()
-            intime=new SimpleDateFormat(" HH:mm:ss").format(Calendar.getInstance().getTime());
-            // println"XXXXXXXXXXXXXXXX"+intt
-
-            attendanceDetail.logIntime=intime
-
-            attendanceDetail.attendanceDate=t2
-
-
-            // println";;;;;;;dddddd"+attendanceDetail.validate()
-            attendanceDetail.save(flush: true,failOnError:true)
-
-            employee.addToAttendance(attendanceDetail)
-            employee.active = attendanceDetail
-        }else{
-            AttendanceDetail attendanceDetail = employee.active
-            if(attendanceDetail){
-                outime=new SimpleDateFormat(" HH:mm:ss").format(Calendar.getInstance().getTime());
-                attendanceDetail.logOuttime = outime
-                attendanceDetail.save(flush:true)
-            }
-
-        }*/
 
 
     }

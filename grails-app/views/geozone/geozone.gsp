@@ -114,8 +114,8 @@
                     <th>select   ZoneType</th>
                     <th>Geozonez ID</th>
                    %{-- <th>ZoneType</th>--}%
-                    <th>ArrivalZone</th>
-                    <th>DepartureZone</th>
+                    %{--<th>ArrivalZone</th>
+                    <th>DepartureZone</th>--}%
                     <th>Radius</th>
                     <th>Latitude</th>
                     <th>Longitude</th>
@@ -139,8 +139,8 @@
 
                     <td>${fieldValue(bean: geozoneInstance,field: "id") }</td>
                     %{--<td>${fieldValue(bean: geozoneInstance,field: "zonetype") }</td>--}%
-                    <td>${fieldValue(bean: geozoneInstance,field: "arrivalZone") }</td>
-                    <td>${fieldValue(bean: geozoneInstance,field: "departureStatusCode") }</td>
+                    %{--<td>${fieldValue(bean: geozoneInstance,field: "arrivalZone") }</td>
+                    <td>${fieldValue(bean: geozoneInstance,field: "departureStatusCode") }</td>--}%
                     <td>${fieldValue(bean: geozoneInstance,field: "radious") }</td>
                     <td>${fieldValue(bean: geozoneInstance,field: "latitude1") }</td>
                         <td>${fieldValue(bean: geozoneInstance,field: "longitude1") }</td>

@@ -7,6 +7,7 @@ class AttendanceDetail {
     Date attendanceDate
     String logIntime
     String logOuttime
+    Time totalTime
 
     static belongsTo = Employee
     //static hasOne = [employee:Employee]
@@ -14,6 +15,7 @@ class AttendanceDetail {
         attendanceDate(nullable: true,blank: true)
         logIntime(nullable: true,blank: true)
         logOuttime(nullable: true,blank: true)
+        totalTime(nullable: true,blank: true)
     }
 
 }

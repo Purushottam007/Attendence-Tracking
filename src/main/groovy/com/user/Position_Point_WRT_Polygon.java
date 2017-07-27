@@ -71,7 +71,7 @@ public class Position_Point_WRT_Polygon
         return (count & 1) == 1 ? true : false;
     }
  
-    public static void main(String args[])
+    /*public static void main(String args[])
     {
         Point polygon1[] = { new Point(0, 0), new Point(10, 0),
                 new Point(10, 10), new Point(0, 10) };
@@ -104,5 +104,5 @@ public class Position_Point_WRT_Polygon
         p = new Point(-1, 10);
         System.out.println("Point P(" + p.x + ", " + p.y
                 + ") lies inside polygon3: " + isInside(polygon3, n, p));
-    }
+    }*/
 }

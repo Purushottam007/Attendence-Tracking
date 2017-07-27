@@ -17,11 +17,6 @@ class GeozoneController {
         println":::::::::::::::::::"+Geozone.list(params)
        // render  model:[geozoneList: Geozone.list(params),geozoneCount: Geozone.count()]
     }
-/*
-    @Secured(['ROLE_USER','ROLE_ADMIN'])
-    def geo(){
-        render view: 'geozone'
-    }*/
 
     @Secured(['ROLE_USER','ROLE_ADMIN'])
     def geozone(Integer max){
@@ -48,19 +43,10 @@ class GeozoneController {
 
     @Secured(['ROLE_USER','ROLE_ADMIN'])
     def ft(){
-        println"LLLLLLLLLLLL"+params
         def path=params.str;
         def cr=params.st;
         def rad=params.stt
         def rect=params.stcnt;
-
- /*       println"OOOOOOOOOOOOOOOOO"+params
-        def user = springSecurityService.currentUser
-        println"EEEEEEEEEEEEEEE"+user.id*/
-
-
-
-
 
         def ar
 
@@ -77,15 +63,8 @@ class GeozoneController {
         else if(rect!='undefined'){
             ar=rect.trim().split(" ")
         }
-       /* else if(point!='undefined'){
-            ar=rect.trim().split(" ")
-        }*/
-
-
 
         Geozone geozone=new Geozone();
-     //   EventData eventData=new EventData()
-
 
         String[] lat = new String[10];
         String[] lng = new String[10];
@@ -138,14 +117,7 @@ class GeozoneController {
         Company company=Company.findById(params.companyId)
         if(company){
             geozone.company=company
-            //company.geozone = geozone
         }
-
-       println"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"+ geozone
-
-        println"BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB"+
-
-               //geozone.setCompany(Company.findById(1))
         geozone.save(failOnError:true);
         println"lllll="+ geozone.getId()
         if(company){
@@ -153,26 +125,11 @@ class GeozoneController {
             company.save(flush:true)
         }
         render geozone.getId()
-
-        //render view: '/form',model: [xyz:geozone.getId()]
     }
 
-
-
-/*
-    def save() {
-        def geozone = new Geozone()
-        geozone.save()
-        render view: 'geozoone'
-    }*/
    @Secured(['ROLE_USER','ROLE_ADMIN'])
     def form() {
-
-       println"RRRRRRRRRRRRRRRRR"+params
        Geozone geozone=Geozone.findById(params.id)
-       /*println"OOOOOOOOOOOOOOOOO"+params.empid
-       def user = springSecurityService.currentUser
-       println"EEEEEEEEEEEEEEE"+user.id*/
        render view: '/form', model:[geozoneInstance: geozone]
     }
 

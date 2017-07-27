@@ -4,6 +4,9 @@ import Entity.AttendanceDetail
 import Entity.Employee
 import grails.plugin.springsecurity.annotation.Secured
 
+import java.text.DateFormat
+import java.text.SimpleDateFormat
+
 
 class SecureController {
     @Secured(['ROLE_USER', 'ROLE_ADMIN'])
@@ -26,42 +29,43 @@ class SecureController {
 
 
         def employeeCriteria = Employee.createCriteria()
-        println";;;;;;;;;;;;;"+params?.employeeName
         def atdresults = employeeCriteria.list(params) {
             if (params?.employeeName) {
-                //  println"WWWWWWWWWWWWWWWWWWWW"+params
-               // println"KKKKKKKKKKKK"+
                 ilike("employeeName", "%${params.employeeName}%")
 
             }
 
             if (params?.employeeParam) {
-              //  println"WWWWWWWWWWWWWWWWWWWW"+params
                 eq("id",params.employeeParam as Long)
 
             }
 
         }
-        println"LLLLLLLLLLLL"+atdresults
-        println"LLLLLLLLLLLL"+atdresults?.attendance.id
         def oo = []
         for(def jj:atdresults.attendance.id){
                 jj.each{ j ->
                     oo.add(j)
                 }
         }
+
         def attendanceCriteria = AttendanceDetail.createCriteria()
          atdresults = attendanceCriteria.list(params) {
             if (params?.attendanceDate) {
-                eq("attendanceDate", params.attendanceDate)
+                def string = params.attendanceDate;
+                DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+                Date date = format.parse(string);
+                eq("attendanceDate",date)
             }
             if (params?.employeeParam || params?.employeeName) {
-                'in'("id",oo)
+                if(oo){
+                    'in'("id",oo)
+                }
+
             }
 
         }
+       // println("OOOOOOOOOO"+atdresults)
         render view: 'menu', model: [attendanceList: atdresults, attendanceDetailCount: AttendanceDetail.count(), empList: Employee.list(params), employeeCount: Employee.count(), from: from, to: to]
     }
-
 
 }
