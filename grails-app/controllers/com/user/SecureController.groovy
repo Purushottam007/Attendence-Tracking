@@ -64,7 +64,6 @@ class SecureController {
             }
 
         }
-       // println("OOOOOOOOOO"+atdresults)
         render view: 'menu', model: [attendanceList: atdresults, attendanceDetailCount: AttendanceDetail.count(), empList: Employee.list(params), employeeCount: Employee.count(), from: from, to: to]
     }
 

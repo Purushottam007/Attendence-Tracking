@@ -47,16 +47,20 @@
         <h2 style="text-align:center;color:darkorange;font-family: Verdana" >ATTEDANCE DETAIL</h2>
         <g:form controller="secure" action="index">
 
-            Select ${username}<button class="btn btn-primary dropdown-toggle" style="border: 0px;color: black; background-color: white; padding-bottom: 3px; padding-top: 3px; padding-left: 6px;padding-right: 6px" type="button" data-toggle="dropdown">
-            <span class="caret"></span></button>
-            %{--<ul class="dropdown-menu">
-                <li><g:link controller="secure" action="index">LessThan</g:link></li>
-                <li><g:link controller="secure" action="index">GreaterThan</g:link></li>
-                <li><g:link controller="secure" action="index">EqualTo</g:link></li>
-                Hr: <g:textField name="employeeName" value="" />
-            </ul>--}%
-            <input type="date" name="attendanceDate" id="attendanceDate">
-                Id: <g:textField name="employeeParam" value="" />
+
+
+                <select id="select" name="" style="width: 115px;">
+                    <option value="Value for Item 1" title="Title for Item 1">LessThan</option>
+                    <option value="Value for Item 2" title="Title for Item 2">GreaterThan</option>
+                    <option value="Value for Item 3" title="Title for Item 3">EqualTo</option>
+                </select>
+            <input id="input" name="" type="" style="width: 50px;">
+
+
+
+
+            <input type="date" name="attendanceDate" id="attendanceDate" >
+                Id: <g:textField name="employeeParam"  value=""  />
             name: <g:textField name="employeeName" value="" />
             <g:submitButton name="submit" value="Search" />
         </g:form>

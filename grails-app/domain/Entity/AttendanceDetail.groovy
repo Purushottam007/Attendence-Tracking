@@ -1,13 +1,17 @@
 package Entity
 
 import java.sql.Time
+import java.time.LocalTime
 
 class AttendanceDetail {
 
     Date attendanceDate
     String logIntime
     String logOuttime
-    Time totalTime
+    Long total
+    Integer hr
+    Integer min
+    Integer sec
 
     static belongsTo = Employee
     //static hasOne = [employee:Employee]
@@ -15,7 +19,10 @@ class AttendanceDetail {
         attendanceDate(nullable: true,blank: true)
         logIntime(nullable: true,blank: true)
         logOuttime(nullable: true,blank: true)
-        totalTime(nullable: true,blank: true)
+        total(nullable: true,blank: true)
+        hr(nullable: true,blank: true)
+        min(nullable: true,blank: true)
+        sec(nullable: true,blank: true)
     }
 
 }

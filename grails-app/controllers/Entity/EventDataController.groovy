@@ -3,8 +3,13 @@ package Entity
 import com.user.Point
 import com.user.Position_Point_WRT_Polygon
 import grails.plugin.springsecurity.annotation.Secured
+import groovy.time.TimeCategory
+import groovy.time.TimeDuration
 
+import java.sql.Time
+import java.sql.Timestamp
 import java.text.SimpleDateFormat
+import java.time.Period
 
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
@@ -36,8 +41,6 @@ class EventDataController {
         def empid=params.employeeId
         def ar
 
-        def lt;
-        def lot;
 
 
         if(point!='undefined') {
@@ -86,9 +89,9 @@ class EventDataController {
             AttendanceDetail attendanceDetail=new AttendanceDetail()
             if (attendanceDetail)
             intime=new SimpleDateFormat(" HH:mm:ss").format(Calendar.getInstance().getTime());
-            lt=intime
 
-            attendanceDetail.logIntime=lt
+
+            attendanceDetail.logIntime=intime
 
             attendanceDetail.attendanceDate=new Date()
 
@@ -101,12 +104,56 @@ class EventDataController {
                 if(attendanceDetail){
                     outime=new SimpleDateFormat(" HH:mm:ss").format(Calendar.getInstance().getTime());
                 attendanceDetail.logOuttime = outime
+
+                    if(attendanceDetail.logOuttime && attendanceDetail.logIntime){
+                        println"::::::::::::::::"+attendanceDetail.logIntime
+                        println"::::::::::::::::"+attendanceDetail.logOuttime
+                        def a=attendanceDetail.logIntime
+                        def b=attendanceDetail.logOuttime
+                        SimpleDateFormat df=new SimpleDateFormat("hh:mm:ss");
+                        Date dt=df.parse(a);
+                        Date dto=df.parse(b);
+
+                        println"OOOOOOOOO"+dt
+                        println"OOOOOOOOO"+dto
+
+
+
+
+
+                        TimeDuration td = TimeCategory.minus( dto, dt )
+                       println"PPPPPPPPPP"+ td.getSeconds()
+                        println"tdddddddddddddd"+td
+
+
+
+                        attendanceDetail.hr=td.getHours()
+                        attendanceDetail.min=td.getMinutes()
+                        attendanceDetail.sec=td.getSeconds()
+
+
+                        /*Formatter.DateTime end = new Formatter.DateTime(b)
+                        Formatter.DateTime start = new Formatter.DateTime(a)
+
+                        Period p = new Period(start, end);
+
+                        long hours = p.getHours();
+                        long minutes = p.getMinutes();*/
+
+
+
+
+
+
+
+
+
+                    }
                 attendanceDetail.save(flush:true)
                     employee.active = null
                             }
 
         }
-        println("GGGGGGGGGGGGGGGGG"+lt)
          employee.save(flush: true,failOnError:true)
          render status:200
     }
